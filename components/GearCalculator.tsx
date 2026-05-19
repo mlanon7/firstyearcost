@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { Segmented } from './Segmented';
+import { tipsGearTier, tipsNurserySetup, tipsRegistry } from '@/content/optionTips';
 import { Disclaimer } from './Disclaimer';
 import { gearCosts, gearItemMeta, registryCoverage } from '@/data/assumptions';
 import { formatUSD } from '@/lib/format';
@@ -56,41 +57,38 @@ export function GearCalculator() {
       <div className="card p-6 lg:p-8 space-y-6">
         <div className="grid sm:grid-cols-3 gap-5">
           <div>
-            <label className="label">Gear tier</label>
             <Segmented
+              label="Gear tier"
               value={tier}
               onChange={setTier}
-              ariaLabel="Tier"
               options={[
-                { value: 'budget',   label: 'Budget' },
-                { value: 'standard', label: 'Standard' },
-                { value: 'premium',  label: 'Premium' },
+                { value: 'budget',   label: 'Budget',   info: tipsGearTier.budget   },
+                { value: 'standard', label: 'Standard', info: tipsGearTier.standard },
+                { value: 'premium',  label: 'Premium',  info: tipsGearTier.premium  },
               ]}
             />
           </div>
           <div>
-            <label className="label">Nursery setup</label>
             <Segmented
+              label="Nursery setup"
               value={setup}
               onChange={setSetup}
-              ariaLabel="Setup"
               options={[
-                { value: 'minimal',  label: 'Minimal' },
-                { value: 'standard', label: 'Standard' },
-                { value: 'premium',  label: 'Full setup' },
+                { value: 'minimal',  label: 'Minimal',    info: tipsNurserySetup.minimal  },
+                { value: 'standard', label: 'Standard',   info: tipsNurserySetup.standard },
+                { value: 'premium',  label: 'Full setup', info: tipsNurserySetup.premium  },
               ]}
             />
           </div>
           <div>
-            <label className="label">Registry help</label>
             <Segmented
+              label="Registry help"
               value={registry}
               onChange={setRegistry}
-              ariaLabel="Registry"
               options={[
-                { value: 'low',    label: 'Low' },
-                { value: 'medium', label: 'Medium' },
-                { value: 'high',   label: 'High' },
+                { value: 'low',    label: 'Low',    info: tipsRegistry.low    },
+                { value: 'medium', label: 'Medium', info: tipsRegistry.medium },
+                { value: 'high',   label: 'High',   info: tipsRegistry.high   },
               ]}
             />
           </div>

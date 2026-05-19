@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { Segmented } from './Segmented';
+import { tipsDiapers, tipsDiaperBrand, tipsBulkBuy } from '@/content/optionTips';
 import { Slider } from './Slider';
 import { Disclaimer } from './Disclaimer';
 import {
@@ -68,28 +69,26 @@ export function DiaperCalculator() {
       <div className="card p-6 lg:p-8 space-y-6">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="label">Diaper plan</label>
             <Segmented
+              label="Diaper plan"
               value={plan}
               onChange={setPlan}
-              ariaLabel="Diaper plan"
               options={[
-                { value: 'disposable', label: 'Disposable' },
-                { value: 'cloth',      label: 'Cloth' },
-                { value: 'mix',        label: 'Mix' },
+                { value: 'disposable', label: 'Disposable', info: tipsDiapers.disposable },
+                { value: 'cloth',      label: 'Cloth',      info: tipsDiapers.cloth      },
+                { value: 'mix',        label: 'Mix',        info: tipsDiapers.mix        },
               ]}
             />
           </div>
           <div>
-            <label className="label">Brand tier</label>
             <Segmented
+              label="Brand tier"
               value={brand}
               onChange={setBrand}
-              ariaLabel="Diaper brand"
               options={[
-                { value: 'budget',     label: 'Store / budget' },
-                { value: 'mainstream', label: 'Pampers / Huggies' },
-                { value: 'premium',    label: 'Honest / Coterie' },
+                { value: 'budget',     label: 'Store / budget',    info: tipsDiaperBrand.budget     },
+                { value: 'mainstream', label: 'Pampers / Huggies', info: tipsDiaperBrand.mainstream },
+                { value: 'premium',    label: 'Honest / Coterie',  info: tipsDiaperBrand.premium    },
               ]}
             />
           </div>
@@ -101,14 +100,13 @@ export function DiaperCalculator() {
             <Slider min={1} max={5} step={0.5} value={wipesPerChange} onChange={setWipesPerChange} />
           </div>
           <div>
-            <label className="label">Buy in bulk?</label>
             <Segmented
+              label="Buy in bulk?"
               value={bulkBuy ? 'yes' : 'no'}
               onChange={(v) => setBulkBuy(v === 'yes')}
-              ariaLabel="Bulk buy"
               options={[
-                { value: 'yes', label: 'Yes (Costco / subscribe)' },
-                { value: 'no',  label: 'No (drugstore)' },
+                { value: 'yes', label: 'Yes (Costco / subscribe)', info: tipsBulkBuy.yes },
+                { value: 'no',  label: 'No (drugstore)',           info: tipsBulkBuy.no  },
               ]}
             />
           </div>

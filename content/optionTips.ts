@@ -486,6 +486,187 @@ export const tipsInsurance: Record<string, TipContent> = {
 };
 
 // =========================================================================
+// Bulk buying (diaper calculator)
+// =========================================================================
+export const tipsBulkBuy: Record<'yes' | 'no', TipContent> = {
+  yes: {
+    summary: 'Buy at Costco/Sam\'s, or use subscribe-and-save on Amazon.',
+    covers: [
+      'Cases of 200+ diapers at warehouse-club rates',
+      'Subscribe & Save 5–15% on Amazon recurring orders',
+      'Often matches store-brand pricing on name brands',
+    ],
+    bestFor: ['Predictable use', 'Settled on a brand that fits your baby'],
+    tradeoffs: [
+      'Storage space needed',
+      'Risk if you buy a case before knowing whether the brand fits',
+    ],
+    example: 'Bulk pricing typically cuts the year-one bill by 15–25%.',
+  },
+  no: {
+    summary: 'Buy as needed at the drugstore or grocery store.',
+    covers: ['Smaller packs, immediate access', 'Easy to try a different brand'],
+    bestFor: ['First few weeks before you settle on a brand', 'Small spaces'],
+    tradeoffs: ['Highest per-unit price'],
+  },
+};
+
+// =========================================================================
+// Pump covered by insurance (feeding calculator)
+// =========================================================================
+export const tipsPumpCovered: Record<'yes' | 'unsure' | 'no', TipContent> = {
+  yes: {
+    summary: 'ACA-mandated benefit — most plans cover one pump per pregnancy.',
+    covers: [
+      'Manual or electric pump (model varies by plan)',
+      'Replacement parts schedule (every 3 months for many plans)',
+      'Lactation support visits, typically 3–6 covered',
+    ],
+    bestFor: ['All employer plans and marketplace plans (required by ACA)'],
+    tradeoffs: [
+      'Plans differ on which pump models are covered — some require add-on payment for premium models',
+      'Some require ordering through a specific durable medical equipment supplier',
+    ],
+  },
+  unsure: {
+    summary: 'Defaults to a moderate estimate that includes some out-of-pocket.',
+    covers: ['Mid-range pump cost ($100–$250 OOP if not covered)', 'Replacement parts and storage bags'],
+    bestFor: ['Pre-confirmation calculations'],
+    tradeoffs: ['Call your insurer — required ACA benefit means most parents pay $0 for the basic pump'],
+  },
+  no: {
+    summary: 'No insurance coverage — pump bought outright.',
+    covers: ['Full retail pump cost ($100–$400+)'],
+    bestFor: ['Uninsured parents', 'Plans grandfathered out of ACA mandates (rare)'],
+    tradeoffs: ['Rental pumps may be cheaper short-term', 'Used pumps are not generally safe — motor wear and contamination concerns'],
+  },
+};
+
+// =========================================================================
+// Bottles & storage gear tier (feeding calculator)
+// =========================================================================
+export const tipsBottlesGear: Record<'minimal' | 'standard' | 'full', TipContent> = {
+  minimal: {
+    summary: 'A handful of bottles, basic dish soap, no extras.',
+    covers: ['4–6 bottles in 1–2 sizes', 'Bottle brush', 'Drying rack'],
+    bestFor: ['Mostly breastfeeding with occasional bottle', 'Tight budget'],
+    tradeoffs: ['More frequent washing', 'May need to add more if returning to work'],
+  },
+  standard: {
+    summary: 'Enough for a day\'s feedings plus a sterilizer.',
+    covers: ['8–12 bottles in 2 sizes', 'Steam sterilizer', 'Bottle warmer', 'Drying rack'],
+    bestFor: ['Most families, especially combo-feeding or daycare-bound'],
+  },
+  full: {
+    summary: 'Complete setup with redundancy and convenience features.',
+    covers: ['12+ bottles + multiple nipple sizes', 'Sterilizer + dryer combo unit', 'Formula prep machine', 'Pre-wash bin'],
+    bestFor: ['Formula-feeding families', 'Twins / multiples'],
+    tradeoffs: ['Some items (formula machine) get mixed reviews — buy after baby arrives'],
+  },
+};
+
+// =========================================================================
+// Lactation consultant (feeding calculator)
+// =========================================================================
+export const tipsLactationConsult: Record<'no' | 'yes', TipContent> = {
+  no: {
+    summary: 'Rely on hospital lactation help + ACA-covered visits.',
+    covers: ['Hospital lactation consultant (often included in delivery stay)', '3–6 covered IBCLC visits on most insurance'],
+    bestFor: ['Most families', 'Parents without specific concerns'],
+  },
+  yes: {
+    summary: 'Plan for out-of-pocket in-home or specialty lactation visits.',
+    covers: ['In-home IBCLC visit ($150–$300)', 'Specialty support (tongue-tie, low supply, premature)', 'Multiple follow-up sessions'],
+    bestFor: ['Families with feeding difficulties', 'Twins or NICU graduates'],
+    tradeoffs: ['Check insurance first — many plans cover IBCLC visits as ACA preventive care'],
+  },
+};
+
+// =========================================================================
+// Nursery setup tier (gear calculator)
+// =========================================================================
+export const tipsNurserySetup: Record<'minimal' | 'standard' | 'premium', TipContent> = {
+  minimal: {
+    summary: 'Bassinet only for the first 6 months; share parent\'s room.',
+    covers: ['Bassinet or co-sleeper', 'Basic changing pad on dresser', 'Small storage'],
+    bestFor: [
+      'Apartment living',
+      'Following AAP room-share guidance for first 6 months',
+      'Budget-focused families',
+    ],
+    tradeoffs: ['Will need a crib eventually — plan for month-6 purchase'],
+  },
+  standard: {
+    summary: 'Crib + dresser/changer + glider + monitor — typical nursery.',
+    covers: ['Convertible crib + mattress', 'Combo dresser/changer', 'Glider or rocker', 'Video monitor'],
+    bestFor: ['Most families with a dedicated nursery room'],
+  },
+  premium: {
+    summary: 'Full nursery with designer furniture, premium monitor, and decor.',
+    covers: ['Solid wood / designer crib', 'Separate dresser + changing table', 'Premium video monitor (Nanit/Owlet)', 'Curated decor'],
+    bestFor: ['First-baby families with strong nursery-aesthetic priorities'],
+    tradeoffs: ['Marginal safety/utility benefit over standard tier — mostly aesthetic'],
+  },
+};
+
+// =========================================================================
+// Newborn on separate deductible (birth insurance planner)
+// =========================================================================
+export const tipsNewbornOnSeparate: Record<'unsure' | 'yes' | 'no', TipContent> = {
+  unsure: {
+    summary: 'Defaults to a small add-on to account for partial coverage rules.',
+    covers: ['Adds a modest newborn-side OOP estimate'],
+    bestFor: ['Pre-call planning'],
+    tradeoffs: ['Call your insurer or HR — this single answer can move your OOP by $1,000+'],
+  },
+  yes: {
+    summary: 'Newborn has their own deductible separate from the parent\'s.',
+    covers: ['Adds full newborn deductible to your planning OOP', 'Common on individual marketplace plans'],
+    bestFor: ['Confirmed via insurer call or Summary of Benefits'],
+    tradeoffs: ['Newborn admission to NICU under separate deductible is the biggest surprise-bill risk'],
+    example: 'Typical add-on: +$800–$1,500 in expected OOP.',
+  },
+  no: {
+    summary: 'Newborn shares the parent\'s deductible (or family deductible).',
+    covers: ['No additional newborn-side OOP modeled', 'Common on employer plans'],
+    bestFor: ['Most employer-sponsored family plans'],
+  },
+};
+
+// =========================================================================
+// Filing status (subsidy calculator)
+// =========================================================================
+export const tipsFiling: Record<'single' | 'hoh' | 'mfj' | 'mfs', TipContent> = {
+  single: {
+    summary: 'Unmarried, no qualifying dependent in your household.',
+    covers: ['Single filer thresholds for CDCTC + FSA cap'],
+    bestFor: ['Most single working parents without HOH-qualifying dependents'],
+  },
+  hoh: {
+    summary: 'Head of household — unmarried but supporting a qualifying dependent.',
+    covers: ['Same FSA cap and CDCTC rate thresholds as Single under §21'],
+    bestFor: ['Single parents (most common HOH scenario)'],
+    tradeoffs: ['Higher standard deduction than Single elsewhere on your taxes — but doesn\'t affect this calculator\'s thresholds'],
+  },
+  mfj: {
+    summary: 'Married, filing one combined federal return with your spouse.',
+    covers: ['Doubled AGI thresholds for the CDCTC rate schedule', 'Full $7,500 FSA cap'],
+    bestFor: ['Most married couples — usually the lowest total tax'],
+  },
+  mfs: {
+    summary: 'Married but filing separate returns.',
+    covers: ['Single-filer AGI thresholds', 'Half FSA cap ($3,750)'],
+    bestFor: [
+      'Specific situations (income-driven student loans, spouse with tax issues, divorce in progress)',
+    ],
+    tradeoffs: [
+      'Almost always results in higher total tax than MFJ',
+      'Disqualifies you from several other credits — confirm with a tax pro before filing this way',
+    ],
+  },
+};
+
+// =========================================================================
 // Delivery type
 // =========================================================================
 export const tipsDelivery: Record<string, TipContent> = {

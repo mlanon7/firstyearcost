@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from 'react';
 import { Segmented } from './Segmented';
+import {
+  tipsFeeding, tipsFormulaType, tipsPumpCovered, tipsBottlesGear, tipsLactationConsult,
+} from '@/content/optionTips';
 import { Disclaimer } from './Disclaimer';
 import {
   formulaCostPerMonth,
@@ -73,37 +76,33 @@ export function FeedingCalculator() {
     <div className="grid lg:grid-cols-[1fr_minmax(0,420px)] gap-6">
       <div className="card p-6 lg:p-8 space-y-6">
         <div>
-          <label className="label">Feeding plan</label>
           <Segmented
+            label="Feeding plan"
             value={plan}
             onChange={setPlan}
-            ariaLabel="Feeding plan"
             options={[
-              { value: 'breastfeeding', label: 'Breastfeeding' },
-              { value: 'formula',       label: 'Formula' },
-              { value: 'combo',         label: 'Combo' },
+              { value: 'breastfeeding', label: 'Breastfeeding', info: tipsFeeding.breastfeeding },
+              { value: 'formula',       label: 'Formula',       info: tipsFeeding.formula       },
+              { value: 'combo',         label: 'Combo',         info: tipsFeeding.combo         },
             ]}
+            help="No judgment — pick what fits your situation."
           />
-          <p className="help">No judgment — pick what fits your situation.</p>
         </div>
 
         {(plan === 'formula' || plan === 'combo') && (
           <div>
-            <label className="label">Formula type</label>
             <Segmented
+              label="Formula type"
               value={formulaType}
               onChange={setFormulaType}
-              ariaLabel="Formula type"
               options={[
-                { value: 'standardPowder', label: 'Standard powder' },
-                { value: 'sensitive',      label: 'Sensitive' },
-                { value: 'hypoallergenic', label: 'Hypoallergenic' },
-                { value: 'readyToFeed',    label: 'Ready-to-feed' },
+                { value: 'standardPowder', label: 'Standard powder', info: tipsFormulaType.standardPowder },
+                { value: 'sensitive',      label: 'Sensitive',       info: tipsFormulaType.sensitive      },
+                { value: 'hypoallergenic', label: 'Hypoallergenic',  info: tipsFormulaType.hypoallergenic },
+                { value: 'readyToFeed',    label: 'Ready-to-feed',   info: tipsFormulaType.readyToFeed    },
               ]}
+              help="Specialty formulas can run 2–3× standard. Talk with your pediatrician before switching types."
             />
-            <p className="help">
-              Specialty formulas can run 2–3× standard. Talk with your pediatrician before switching types.
-            </p>
           </div>
         )}
 
@@ -111,46 +110,41 @@ export function FeedingCalculator() {
           <>
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="label">Pump covered by insurance?</label>
                 <Segmented
+                  label="Pump covered by insurance?"
                   value={pumpCovered}
                   onChange={setPumpCovered}
-                  ariaLabel="Pump coverage"
                   options={[
-                    { value: 'yes',    label: 'Yes' },
-                    { value: 'unsure', label: 'Unsure' },
-                    { value: 'no',     label: 'No' },
+                    { value: 'yes',    label: 'Yes',    info: tipsPumpCovered.yes    },
+                    { value: 'unsure', label: 'Unsure', info: tipsPumpCovered.unsure },
+                    { value: 'no',     label: 'No',     info: tipsPumpCovered.no     },
                   ]}
                 />
               </div>
               <div>
-                <label className="label">Bottles & storage gear</label>
                 <Segmented
+                  label="Bottles & storage gear"
                   value={bottlesGear}
                   onChange={setBottlesGear}
-                  ariaLabel="Bottles gear"
                   options={[
-                    { value: 'minimal',  label: 'Minimal' },
-                    { value: 'standard', label: 'Standard' },
-                    { value: 'full',     label: 'Full setup' },
+                    { value: 'minimal',  label: 'Minimal',    info: tipsBottlesGear.minimal  },
+                    { value: 'standard', label: 'Standard',   info: tipsBottlesGear.standard },
+                    { value: 'full',     label: 'Full setup', info: tipsBottlesGear.full     },
                   ]}
                 />
               </div>
             </div>
             <div>
-              <label className="label">Plan to use lactation consultant out-of-pocket?</label>
               <Segmented
+                label="Plan to use lactation consultant out-of-pocket?"
                 value={lactationConsult}
                 onChange={setLactationConsult}
-                ariaLabel="Lactation consult"
                 options={[
-                  { value: 'no',  label: 'No' },
-                  { value: 'yes', label: 'Yes' },
+                  { value: 'no',  label: 'No',  info: tipsLactationConsult.no  },
+                  { value: 'yes', label: 'Yes', info: tipsLactationConsult.yes },
                 ]}
+                help="Many insurers cover lactation consults; check with your plan first."
               />
-              <p className="help">
-                Many insurers cover lactation consults; check with your plan first.
-              </p>
             </div>
           </>
         )}

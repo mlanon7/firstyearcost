@@ -3,7 +3,9 @@
 import { useMemo, useState } from 'react';
 import { formatUSD } from '@/lib/format';
 import { StatCard } from '@/components/StatCard';
+import { Segmented } from '@/components/Segmented';
 import { calcSubsidy, type Filing } from '@/lib/subsidy';
+import { tipsFiling } from '@/content/optionTips';
 
 // Childcare Subsidy & Tax-Credit Estimator — 2026 tax year (OBBBA)
 // ---------------------------------------------------------------
@@ -58,17 +60,17 @@ export function SubsidyCalculator() {
     <div className="grid lg:grid-cols-2 gap-6">
       <div className="card p-6 space-y-5">
         <div>
-          <label className="label">Filing status</label>
-          <div className="segmented">
-            {(['single', 'hoh', 'mfj', 'mfs'] as Filing[]).map((f) => (
-              <button key={f} className={filing === f ? 'active' : ''} onClick={() => setFiling(f)}>
-                {f === 'mfj' ? 'Married filing jointly'
-                  : f === 'mfs' ? 'Married filing separately'
-                  : f === 'hoh' ? 'Head of household'
-                  : 'Single'}
-              </button>
-            ))}
-          </div>
+          <Segmented<Filing>
+            label="Filing status"
+            value={filing}
+            onChange={setFiling}
+            options={[
+              { value: 'single', label: 'Single',                     info: tipsFiling.single },
+              { value: 'hoh',    label: 'Head of household',          info: tipsFiling.hoh    },
+              { value: 'mfj',    label: 'Married filing jointly',     info: tipsFiling.mfj    },
+              { value: 'mfs',    label: 'Married filing separately',  info: tipsFiling.mfs    },
+            ]}
+          />
         </div>
 
         <div>

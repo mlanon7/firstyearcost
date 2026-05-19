@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Segmented } from './Segmented';
 import { Slider } from './Slider';
+import { tipsChildcare } from '@/content/optionTips';
 import { Disclaimer } from './Disclaimer';
 import {
   stateChildcare,
@@ -85,17 +86,16 @@ export function ChildcareCalculator({
             </select>
           </div>
           <div>
-            <label className="label">Care type</label>
             <Segmented
+              label="Care type"
               value={careType}
               onChange={setCareType}
-              ariaLabel="Care type"
               options={[
-                { value: 'centerCare', label: 'Center' },
-                { value: 'homeCare',   label: 'Home daycare' },
-                { value: 'nanny',      label: 'Nanny' },
-                { value: 'nannyShare', label: 'Nanny share' },
-                { value: 'partTime',   label: 'Part-time' },
+                { value: 'centerCare', label: 'Center',       info: tipsChildcare.centerCare },
+                { value: 'homeCare',   label: 'Home daycare', info: tipsChildcare.homeCare   },
+                { value: 'nanny',      label: 'Nanny',        info: tipsChildcare.nanny      },
+                { value: 'nannyShare', label: 'Nanny share',  info: tipsChildcare.nannyShare },
+                { value: 'partTime',   label: 'Part-time',    info: tipsChildcare.partTime   },
               ]}
             />
           </div>

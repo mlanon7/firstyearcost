@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { Segmented } from './Segmented';
+import { tipsInsurance, tipsDelivery, tipsNewbornOnSeparate } from '@/content/optionTips';
 import { Disclaimer } from './Disclaimer';
 import {
   birthOOPRanges,
@@ -80,29 +81,27 @@ export function BirthInsuranceCalculator() {
       <div className="card p-6 lg:p-8 space-y-6">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <label className="label">Insurance type</label>
             <Segmented
+              label="Insurance type"
               value={insurance}
               onChange={setInsurance}
-              ariaLabel="Insurance"
               options={[
-                { value: 'employer',    label: 'Employer plan' },
-                { value: 'marketplace', label: 'Marketplace' },
-                { value: 'medicaid',    label: 'Medicaid' },
-                { value: 'uninsured',   label: 'Uninsured' },
+                { value: 'employer',    label: 'Employer plan', info: tipsInsurance.employer    },
+                { value: 'marketplace', label: 'Marketplace',   info: tipsInsurance.marketplace },
+                { value: 'medicaid',    label: 'Medicaid',      info: tipsInsurance.medicaid    },
+                { value: 'uninsured',   label: 'Uninsured',     info: tipsInsurance.uninsured   },
               ]}
             />
           </div>
           <div>
-            <label className="label">Expected delivery</label>
             <Segmented
+              label="Expected delivery"
               value={delivery}
               onChange={setDelivery}
-              ariaLabel="Delivery"
               options={[
-                { value: 'unknown',  label: 'Unknown' },
-                { value: 'vaginal',  label: 'Vaginal' },
-                { value: 'csection', label: 'C-section' },
+                { value: 'unknown',  label: 'Unknown',   info: tipsDelivery.unknown  },
+                { value: 'vaginal',  label: 'Vaginal',   info: tipsDelivery.vaginal  },
+                { value: 'csection', label: 'C-section', info: tipsDelivery.csection },
               ]}
             />
           </div>
@@ -135,18 +134,17 @@ export function BirthInsuranceCalculator() {
             </div>
 
             <div>
-              <label className="label">Newborn on separate deductible?</label>
               <Segmented
+                label="Newborn on separate deductible?"
                 value={newbornOnSeparate}
                 onChange={setNewbornOnSeparate}
-                ariaLabel="Newborn deductible"
                 options={[
-                  { value: 'unsure', label: 'Unsure' },
-                  { value: 'yes',    label: 'Yes' },
-                  { value: 'no',     label: 'No' },
+                  { value: 'unsure', label: 'Unsure', info: tipsNewbornOnSeparate.unsure },
+                  { value: 'yes',    label: 'Yes',    info: tipsNewbornOnSeparate.yes    },
+                  { value: 'no',     label: 'No',     info: tipsNewbornOnSeparate.no     },
                 ]}
+                help="Some plans run the newborn under a separate deductible — call your insurer to confirm."
               />
-              <p className="help">Some plans run the newborn under a separate deductible — call your insurer to confirm.</p>
             </div>
           </>
         )}
