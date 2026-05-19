@@ -203,7 +203,11 @@ input.input:focus {
   box-shadow: 0 0 0 3px rgba(199,95,62,0.22);
 }
 
-/* Segmented control */
+/* Segmented control
+   Structure: .segmented > .segmented-item > [.chip, .info-trigger?]
+   The chip is the click target; the info-trigger is a small ⓘ button that
+   opens an InfoTip popover. They live side-by-side inside the segmented-item
+   so the InfoTip popover positions correctly relative to the icon. */
 .segmented {
   display: inline-flex;
   flex-wrap: wrap;
@@ -213,7 +217,12 @@ input.input:focus {
   border: 1px solid rgb(var(--line));
   border-radius: 0.75rem;
 }
-.segmented button {
+.segmented-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+.segmented .chip {
   padding: 0.45rem 0.85rem;
   border-radius: 0.5rem;
   font-size: 0.875rem;
@@ -221,15 +230,101 @@ input.input:focus {
   color: rgb(var(--ink-soft));
   background: transparent;
   border: 1px solid transparent;
-  transition: all 0.18s ease;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
   cursor: pointer;
 }
-.segmented button:hover { color: rgb(var(--ink)); background: rgba(255,250,242,0.6); }
-.segmented button.active {
+.segmented .chip:hover { color: rgb(var(--ink)); background: rgba(255,250,242,0.6); }
+.segmented .chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(var(--teal));
+}
+.segmented .chip.active {
   background: rgb(var(--bg-elev));
   color: rgb(var(--ink));
   border-color: rgb(var(--line));
   box-shadow: 0 1px 2px rgba(72,48,24,0.08);
+}
+
+/* Info trigger — small ⓘ icon next to each chip. Subtle at rest; warmer on
+   hover so it's discoverable but doesn't compete with chip labels.
+   Sized small enough that the natural sweep path across chips rarely lands
+   on it — combined with the 350ms hover delay in InfoTip, this keeps the
+   tooltip strictly opt-in. */
+.info-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: rgb(var(--ink-mute));
+  cursor: help;
+  transition: color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+.info-trigger:hover,
+.info-trigger:focus-visible {
+  color: rgb(var(--teal));
+  background: rgb(var(--teal-soft));
+  outline: none;
+  transform: scale(1.1);
+}
+.segmented-item:has(> .chip.active) .info-trigger { color: rgb(var(--teal)); }
+
+/* InfoTip popover card — warm cream surface, soft warm shadow, slow soft
+   fade-slide entry animation. */
+.infotip-card {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: min(20rem, 80vw);
+  padding: 0.875rem 1rem;
+  background: rgb(var(--bg-elev));
+  border: 1px solid rgb(var(--line));
+  border-radius: 0.875rem;
+  box-shadow:
+    0 1px 3px rgba(72, 48, 24, 0.08),
+    0 8px 24px rgba(72, 48, 24, 0.10),
+    0 24px 48px rgba(72, 48, 24, 0.10);
+  text-align: left;
+  pointer-events: auto;
+  animation: infotip-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: top center;
+}
+.infotip-card.bottom-full { transform-origin: bottom center; }
+@keyframes infotip-in {
+  from { opacity: 0; transform: translate(-50%, -6px) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+.infotip-arrow {
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: rgb(var(--bg-elev));
+  border-left: 1px solid rgb(var(--line));
+  border-top: 1px solid rgb(var(--line));
+}
+.infotip-card.bottom-full .infotip-arrow {
+  top: auto;
+  bottom: -5px;
+  border-left: none;
+  border-top: none;
+  border-right: 1px solid rgb(var(--line));
+  border-bottom: 1px solid rgb(var(--line));
+}
+
+/* Respect reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  .infotip-card { animation: none; }
 }
 
 /* ============================================================================
