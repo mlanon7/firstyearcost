@@ -1,5 +1,5 @@
-insurance,low_usd,mid_usd,high_usd
-employer,200,600,1500
-marketplace,250,750,2000
-medicaid,0,0,150
-uninsured,1200,2200,4500
+insurance,low_usd,mid_usd,high_usd,source_id,last_reviewed,notes
+employer,200,600,1500,kff-pregnancy-costs-2024,2026-05-08,"Newborn first-year OOP: well-baby visits, vaccines, sick visits. Excludes NICU."
+marketplace,250,750,2000,cms-2026-oop-limits,2026-05-18,Varies with metal tier; subject to ACA OOP max.
+medicaid,0,0,150,healthcare-gov-newborn-sep,2026-05-08,Medicaid covers well-baby care in full; trivial cost-share in some states.
+uninsured,1200,2200,4500,retail-q1-2026,2026-04-30,Cash-pay well-baby and vaccine schedule; assumes some financial-assistance availability.

@@ -1,9 +1,9 @@
-insurance,delivery,low_usd,mid_usd,high_usd
-employer,vaginal,1200,2600,5500
-employer,csection,2000,3100,6500
-marketplace,vaginal,1500,3500,7500
-marketplace,csection,2500,5000,10500
-medicaid,vaginal,0,0,250
-medicaid,csection,0,0,350
-uninsured,vaginal,8000,15000,28000
-uninsured,csection,14000,22000,38000
+insurance,delivery,low_usd,mid_usd,high_usd,source_id,last_reviewed,notes
+employer,vaginal,1200,2600,5500,kff-pregnancy-costs,2026-05-08,Anchored to Peterson-KFF average $2563 OOP; band reflects deductible/coinsurance variation.
+employer,csection,2000,3100,6500,kff-pregnancy-costs,2026-05-08,Anchored to Peterson-KFF average $3071 OOP; slightly wider for longer hospital stay.
+marketplace,vaginal,1500,3500,7500,cms-2026-oop-limits,2026-05-18,Directional — varies with metal tier and subsidy. Capped by ACA OOP max.
+marketplace,csection,2500,5000,10500,cms-2026-oop-limits,2026-05-18,Often hits ACA OOP max for full-price marketplace plans.
+medicaid,vaginal,0,0,250,healthcare-gov-newborn-sep,2026-05-08,Medicaid covers labor & delivery in full in nearly all states; trivial copays in some.
+medicaid,csection,0,0,350,healthcare-gov-newborn-sep,2026-05-08,Same as vaginal; very limited cost-sharing.
+uninsured,vaginal,8000,15000,28000,kff-pregnancy-costs,2026-05-08,Wide range — hospital cash discounts and financial assistance vary by facility.
+uninsured,csection,14000,22000,38000,kff-pregnancy-costs,2026-05-08,Wider for surgical delivery; ask hospital for financial assistance application.

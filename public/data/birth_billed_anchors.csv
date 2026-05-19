@@ -1,3 +1,3 @@
-delivery,billed_total_usd,notes
-vaginal,15712,"Peterson-KFF: $15,712 average billed for vaginal delivery (employer plan)"
-csection,28998,"Peterson-KFF: $28,998 average billed for C-section (employer plan)"
+delivery,billed_total_usd,source_id,last_reviewed,notes
+vaginal,15712,kff-pregnancy-costs,2026-05-08,"Peterson-KFF average billed total for vaginal delivery (employer plan, 2022 claims)."
+csection,28998,kff-pregnancy-costs,2026-05-08,"Peterson-KFF average billed total for C-section (employer plan, 2022 claims)."

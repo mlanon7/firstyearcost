@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { formatUSD } from '@/lib/format';
 import { StatCard } from '@/components/StatCard';
+import { calcSubsidy, type Filing } from '@/lib/subsidy';
 
 // Childcare Subsidy & Tax-Credit Estimator — 2026 tax year (OBBBA)
 // ---------------------------------------------------------------
@@ -42,44 +43,6 @@ import { StatCard } from '@/components/StatCard';
 //   - State CDCTC equivalents stack on top; not modeled here.
 //   - Non-refundable: doesn't generate a refund beyond your tax liability.
 
-type Filing = 'single' | 'hoh' | 'mfj' | 'mfs';
-
-function cdctcRate(agi: number, filing: Filing): number {
-  // Thresholds: MFJ is doubled; MFS is half of MFJ.
-  const scale =
-    filing === 'mfj' ? 2 :
-    filing === 'mfs' ? 1 : // MFS uses single thresholds for the credit too (per §21)
-    1;
-  const t50 = 15000 * scale;
-  const tFlat = 75000 * scale;
-  const tFloor = 103000 * scale;
-
-  if (agi <= t50) return 0.50;
-  if (agi <= tFlat) return 0.35;
-  if (agi >= tFloor) return 0.20;
-  // Linear glide 35% → 20% within (tFlat, tFloor).
-  const pos = (agi - tFlat) / (tFloor - tFlat);
-  return 0.35 - 0.15 * pos;
-}
-
-function fsaCap(filing: Filing): number {
-  // 2026 OBBBA-adjusted dependent-care assistance exclusion.
-  return filing === 'mfs' ? 3750 : 7500;
-}
-
-function marginalBracketProxy(agi: number, filing: Filing): number {
-  // Rough 2026 federal marginal bracket midpoints. Not authoritative.
-  // Used only to estimate FSA pre-tax savings.
-  const t = filing === 'mfj' ? 2 : 1;
-  if (agi <= 11_925 * t) return 0.10;
-  if (agi <= 48_475 * t) return 0.12;
-  if (agi <= 103_350 * t) return 0.22;
-  if (agi <= 197_300 * t) return 0.24;
-  if (agi <= 250_525 * t) return 0.32;
-  if (agi <= 626_350 * t) return 0.35;
-  return 0.37;
-}
-
 export function SubsidyCalculator() {
   const [filing, setFiling] = useState<Filing>('mfj');
   const [agi, setAgi] = useState(95000);
@@ -87,25 +50,10 @@ export function SubsidyCalculator() {
   const [spend, setSpend] = useState(15000);
   const [fsa, setFsa] = useState(7500);
 
-  const result = useMemo(() => {
-    const cap = fsaCap(filing);
-    const fsaUsed = Math.max(0, Math.min(fsa, cap, spend));
-
-    // CDCTC qualifying-expense base
-    const qualBase = kids >= 2 ? 6000 : 3000;
-    const cdctcQual = Math.max(0, Math.min(spend - fsaUsed, qualBase));
-    const rate = cdctcRate(agi, filing);
-    const cdctc = Math.round(cdctcQual * rate);
-
-    // FSA savings
-    const bracket = marginalBracketProxy(agi, filing);
-    const fica = 0.0765;
-    const fsaSavings = Math.round(fsaUsed * (bracket + fica));
-
-    const combined = cdctc + fsaSavings;
-
-    return { fsaUsed, cap, cdctcQual, rate, cdctc, bracket, fsaSavings, combined };
-  }, [filing, agi, kids, spend, fsa]);
+  const result = useMemo(
+    () => calcSubsidy({ filing, agi, kids, spend, fsa }),
+    [filing, agi, kids, spend, fsa],
+  );
 
   return (
     <div className="grid lg:grid-cols-2 gap-6">
