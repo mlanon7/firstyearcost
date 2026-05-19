@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { sourceNotes } from '@/data/sourceNotes';
 import { SectionHeader } from '@/components/SectionHeader';
 import { NextStepCTA } from '@/components/NextStepCTA';
-import { BreadcrumbsJsonLd, DatasetJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, DatasetJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Methodology & Sources',
@@ -28,6 +28,12 @@ export default function Page() {
   return (
     <>
       <BreadcrumbsJsonLd
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Methodology', url: 'https://firstyearcost.com/methodology' },
+        ]}
+      />
+      <VisibleBreadcrumbs
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Methodology', url: 'https://firstyearcost.com/methodology' },

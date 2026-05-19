@@ -78,7 +78,10 @@ export default function Page({ params }: { params: Params }) {
       <section className="container-pg pb-10">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Stat label="Paid weeks" value={s.paidLeaveWeeks > 0 ? `${s.paidLeaveWeeks}` : '0'} accent={s.paidLeaveWeeks > 0 ? 'teal' : 'coral'} />
-          <Stat label="Wage replacement" value={s.wageReplacementPct > 0 ? `${Math.round(s.wageReplacementPct * 100)}%` : '—'} />
+          <Stat
+            label={isTiered(s) ? 'Wage replacement (up to)' : 'Wage replacement'}
+            value={s.wageReplacementPct > 0 ? `${Math.round(s.wageReplacementPct * 100)}%` : '—'}
+          />
           <Stat label="Max weekly benefit" value={s.maxWeeklyBenefitUsd > 0 ? formatUSD(s.maxWeeklyBenefitUsd) : '—'} />
           <Stat label="Job protection" value={s.jobProtection} />
         </div>
@@ -86,6 +89,15 @@ export default function Page({ params }: { params: Params }) {
         <div className="mt-6 card p-6">
           <h2 className="h4 text-ink-900">Program details</h2>
           <p className="mt-2 text-sm text-ink-700 leading-relaxed">{s.notes}</p>
+          {isTiered(s) && (
+            <p className="mt-3 text-sm text-ink-700 leading-relaxed">
+              <strong>How the tier works:</strong>{' '}
+              {Math.round(s.lowTierPct * 100)}% on wages up to {Math.round(s.lowTierCapPct * 100)}%
+              of the state average weekly wage (SAWW), then{' '}
+              {Math.round(s.upperTierPct * 100)}% above — capped at{' '}
+              {formatUSD(s.maxWeeklyBenefitUsd)}/week.
+            </p>
+          )}
           <p className="mt-4 text-sm">
             <a
               href={s.sourceUrl}
@@ -177,25 +189,52 @@ export default function Page({ params }: { params: Params }) {
 
       <section className="container-pg pb-16">
         <SectionHeader title="Other state leave programs" eyebrow="Compare" />
-        <p className="mt-2 text-sm text-ink-600">A few notable neighbors and comparable programs.</p>
+        <p className="mt-2 text-sm text-ink-600">
+          Programs with similar paid weeks and benefit caps.
+        </p>
         <div className="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {[...stateLeave]
-            .filter((x) => x.code !== s.code && x.paidLeaveWeeks > 0)
-            .slice(0, 6)
-            .map((x) => (
-              <Link
-                key={x.code}
-                href={`/maternity-leave-by-state/${slugifyState(x.name)}`}
-                className="card p-4 hover:shadow-pop hover:-translate-y-0.5 transition"
-              >
-                <p className="font-semibold text-ink-900">{x.name}</p>
-                <p className="text-sm text-ink-600 mt-1">{x.paidLeaveWeeks}w · {Math.round(x.wageReplacementPct * 100)}% wages</p>
-              </Link>
-            ))}
+          {pickRelatedStates(s).map((x) => (
+            <Link
+              key={x.code}
+              href={`/maternity-leave-by-state/${slugifyState(x.name)}`}
+              className="card p-4 hover:shadow-pop hover:-translate-y-0.5 transition"
+            >
+              <p className="font-semibold text-ink-900">{x.name}</p>
+              <p className="text-sm text-ink-600 mt-1">{x.paidLeaveWeeks}w · up to {Math.round(x.wageReplacementPct * 100)}% wages · ${x.maxWeeklyBenefitUsd}/wk</p>
+            </Link>
+          ))}
         </div>
       </section>
     </>
   );
+}
+
+/** A state's wage replacement is tiered if the two tier rates differ. */
+function isTiered(s: { lowTierPct: number; upperTierPct: number }): boolean {
+  return s.lowTierPct > 0 && Math.abs(s.lowTierPct - s.upperTierPct) > 0.01;
+}
+
+/**
+ * Pick the 6 most-related paid-leave states for the given state.
+ * Score is the L1 distance on three normalized axes:
+ *   - paid weeks (Δ weeks)
+ *   - wage replacement (Δ percentage points × 50)
+ *   - max weekly cap (Δ $ × 0.05)
+ * Lowest score wins. Stable across builds (no randomness).
+ */
+function pickRelatedStates(s: typeof stateLeave[number]) {
+  return [...stateLeave]
+    .filter((x) => x.code !== s.code && x.paidLeaveWeeks > 0)
+    .map((x) => ({
+      state: x,
+      score:
+        Math.abs(x.paidLeaveWeeks - s.paidLeaveWeeks) +
+        Math.abs(x.wageReplacementPct - s.wageReplacementPct) * 50 +
+        Math.abs(x.maxWeeklyBenefitUsd - s.maxWeeklyBenefitUsd) * 0.05,
+    }))
+    .sort((a, b) => a.score - b.score || a.state.name.localeCompare(b.state.name))
+    .slice(0, 6)
+    .map((x) => x.state);
 }
 
 function Stat({ label, value, accent = 'ink' }: { label: string; value: string; accent?: 'ink' | 'teal' | 'coral' }) {

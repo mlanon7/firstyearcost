@@ -45,7 +45,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-600">
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-teal-600" /> No signup</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-teal-600" /> No signup required</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-teal-600" /> Source-backed assumptions</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-teal-600" /> 50-state childcare data</span>
               <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-teal-600" /> Free</span>
@@ -284,8 +284,9 @@ export default function HomePage() {
             <div
               className="absolute inset-0 opacity-30 pointer-events-none"
               style={{
+                // Warm terracotta + honey accents matching the v3 palette.
                 background:
-                  'radial-gradient(600px 250px at 80% 20%, rgba(38,169,156,0.55), transparent 60%), radial-gradient(500px 200px at 10% 90%, rgba(247,78,58,0.35), transparent 60%)',
+                  'radial-gradient(600px 250px at 80% 20%, rgba(199,95,62,0.55), transparent 60%), radial-gradient(500px 200px at 10% 90%, rgba(224,133,21,0.35), transparent 60%)',
               }}
             />
             <div className="relative">

@@ -75,8 +75,8 @@ export default function Page() {
             <p className="text-xs uppercase tracking-wider text-ink-500 font-semibold">States with paid leave</p>
             <p className="text-4xl font-extrabold mt-1 text-ink-900">{paid.length}</p>
             <p className="text-sm text-ink-600 mt-2">
-              13 states + DC currently run mandatory paid family-leave programs
-              (some launched 2024–2026).
+              {paid.length} jurisdictions ({paid.length - 1} states plus DC) currently run
+              mandatory paid family-leave programs (some launched 2024–2026).
             </p>
           </div>
           <div className="card p-6">
@@ -115,7 +115,7 @@ export default function Page() {
                   <th className="text-left font-semibold px-4 py-3">State</th>
                   <th className="text-left font-semibold px-4 py-3 hidden sm:table-cell">Program</th>
                   <th className="text-right font-semibold px-4 py-3">Paid weeks</th>
-                  <th className="text-right font-semibold px-4 py-3 hidden md:table-cell">Wage replacement</th>
+                  <th className="text-right font-semibold px-4 py-3 hidden md:table-cell">Wage replacement (up to)</th>
                   <th className="text-right font-semibold px-4 py-3 hidden md:table-cell">Max / wk</th>
                 </tr>
               </thead>
@@ -149,10 +149,15 @@ export default function Page() {
         </div>
 
         <p className="mt-4 text-xs text-ink-500">
-          Last reviewed 2026-05-01. Programs change annually — check the linked official
-          source on each state page before relying on a number. Some states
-          (Delaware, Maine, Maryland, Minnesota) launched payments in 2026 so
-          payroll contributions began earlier than the first benefit checks.
+          Last reviewed 2026-05-19. Programs change annually — check the linked
+          official source on each state page before relying on a number.
+          Delaware, Maine, and Minnesota launched benefits in 2026; Maryland
+          was scheduled for 2026 but the launch was delayed (contributions
+          begin January 2027, benefits January 2028). Most state programs pay
+          a <em>tiered</em> wage replacement (e.g., 90% up to a fraction of
+          the state average weekly wage, then a lower percentage above) —
+          the headline "up to" rate is the top tier; check the per-state
+          page for the full formula.
         </p>
 
         <div className="mt-8">

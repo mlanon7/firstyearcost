@@ -5,7 +5,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 const URL = 'https://firstyearcost.com/second-baby-cost';
 
@@ -60,6 +60,12 @@ export default function Page() {
         url={URL}
       />
       <BreadcrumbsJsonLd
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Second baby cost', url: URL },
+        ]}
+      />
+      <VisibleBreadcrumbs
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Second baby cost', url: URL },

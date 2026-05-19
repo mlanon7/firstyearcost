@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Month-by-Month Baby Budget — What to Expect Each Month',
@@ -49,6 +49,12 @@ export default function Page() {
         url="https://firstyearcost.com/monthly-baby-budget"
       />
       <BreadcrumbsJsonLd
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Monthly baby budget', url: 'https://firstyearcost.com/monthly-baby-budget' },
+        ]}
+      />
+      <VisibleBreadcrumbs
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Monthly baby budget', url: 'https://firstyearcost.com/monthly-baby-budget' },

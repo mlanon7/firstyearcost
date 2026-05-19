@@ -7,7 +7,7 @@ import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { birthOOPRanges, birthBilledAnchors } from '@/data/assumptions';
 import { formatUSD } from '@/lib/format';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 const URL = 'https://firstyearcost.com/c-section-vs-vaginal-cost';
 
@@ -76,6 +76,13 @@ export default function Page() {
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'C-section vs vaginal cost', url: URL },
+        ]}
+      />
+      <VisibleBreadcrumbs
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Birth Costs', url: 'https://firstyearcost.com/birth-insurance-planner' },
+          { name: 'C-section vs vaginal', url: URL },
         ]}
       />
 

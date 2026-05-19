@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Daycare vs. Nanny Cost — Which Is Cheaper?',
@@ -58,6 +58,13 @@ export default function Page() {
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Daycare vs. nanny cost', url: 'https://firstyearcost.com/daycare-vs-nanny-cost' },
+        ]}
+      />
+      <VisibleBreadcrumbs
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Childcare', url: 'https://firstyearcost.com/childcare-calculator' },
+          { name: 'Daycare vs. nanny', url: 'https://firstyearcost.com/daycare-vs-nanny-cost' },
         ]}
       />
       <section className="hero-bg">

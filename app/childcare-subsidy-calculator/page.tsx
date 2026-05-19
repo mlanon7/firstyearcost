@@ -6,7 +6,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { SubsidyCalculator } from '@/components/SubsidyCalculator';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { EmailCapture } from '@/components/EmailCapture';
 
 const URL = 'https://firstyearcost.com/childcare-subsidy-calculator';
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 const faq: FAQItem[] = [
   {
     q: 'What is the Child & Dependent Care Tax Credit (CDCTC)?',
-    a: "It's a non-refundable federal tax credit that offsets a percentage of qualifying childcare expenses for kids under 13. Under the One Big Beautiful Bill Act (OBBBA) effective tax year 2026, the maximum rate rose from 35% to 50%. The rate is 50% at AGIs at or below $15,000 (single/HOH) or $30,000 (MFJ), 35% across a broad middle band, and phases down to a 20% floor above $103,000 (single/HOH) or $206,000 (MFJ). Qualifying-expense cap is $3,000 for one child and $6,000 for two or more.",
+    a: "It's a non-refundable federal tax credit that offsets a percentage of qualifying childcare expenses for kids under 13. Under the One Big Beautiful Bill Act (OBBBA) effective tax year 2026, the maximum rate rose from 35% to 50%. The actual schedule is a two-phase step function: start at 50% if AGI is at or below $15,000 single/HOH or $30,000 MFJ, then reduce by 1 percentage point per $2,000 of AGI (single/HOH) or $4,000 (MFJ) above that threshold until it hits a 35% floor; hold flat at 35% up to $75,000 / $150,000; then reduce again 1 percentage point per the same step until it hits a 20% floor at $105,001+ single/HOH or $210,001+ MFJ. Qualifying-expense cap is $3,000 for one child and $6,000 for two or more.",
   },
   {
     q: 'Can I use both a Dependent Care FSA and the CDCTC?',
@@ -36,7 +36,7 @@ const faq: FAQItem[] = [
   },
   {
     q: 'How much can I put in a Dependent Care FSA in 2026?',
-    a: 'The federal cap was raised to $7,500 per household for single filers, head-of-household, and married filing jointly (up from $5,000), or $3,750 if married filing separately (up from $2,500). This is the first increase since 1986 and took effect with the 2026 plan year under OBBBA. Note: IRS nondiscrimination rules can require your employer to *reduce* the amount that highly compensated employees may exclude — these rules lower the cap for HCEs, they do not raise it. Unused funds at year-end are forfeited unless your plan allows a carryover or grace period.',
+    a: 'The federal cap was raised to $7,500 per household for single filers, head-of-household, and married filing jointly (up from $5,000), or $3,750 if married filing separately (up from $2,500). This is the first increase since 1986 and took effect with the 2026 plan year under OBBBA. Note: IRS nondiscrimination rules can require your employer to reduce the amount that highly compensated employees (HCEs) may exclude — these rules lower the cap for HCEs, they do not raise it. Unused funds at year-end are forfeited unless your plan allows a carryover or grace period.',
   },
   {
     q: 'Do states have their own childcare tax credits?',
@@ -65,6 +65,12 @@ export default function Page() {
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Childcare subsidy & tax credit', url: URL },
+        ]}
+      />
+      <VisibleBreadcrumbs
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Tax & FSA', url: URL },
         ]}
       />
 
@@ -122,7 +128,13 @@ export default function Page() {
           <ul>
             <li>Applies to qualifying childcare spend <em>not</em> already run through the FSA.</li>
             <li>Qualifying spend cap: $3,000 (one child) / $6,000 (two or more).</li>
-            <li><strong>2026 rate (OBBBA): 50% maximum</strong> at AGI ≤ $15,000 (single/HOH) or $30,000 (MFJ); 35% across a broad middle band; phasing down to a 20% floor above $103,000 (single/HOH) or $206,000 (MFJ).</li>
+            <li>
+              <strong>2026 rate (OBBBA): 50% maximum</strong> at AGI ≤ $15,000 (single/HOH) or $30,000 (MFJ).
+              The schedule is a two-phase step: rate drops 1pp per $2,000 (single/HOH) / $4,000 (MFJ) above
+              that threshold until it hits a 35% floor (~$43k single / ~$86k MFJ); holds flat at 35% up
+              to $75,000 / $150,000; then drops 1pp per same step until it hits a 20% floor at $105k+
+              single / $210k+ MFJ.
+            </li>
             <li>Most middle-income families with one child land between 20–35%, so the federal credit typically tops out at $600–$1,050 with one child and $1,200–$2,100 with two or more after maxing the FSA.</li>
             <li>Non-refundable: it can reduce your tax bill to zero but doesn't generate a refund beyond that. Low-income families who already owe no federal tax may get $0 from this credit — but may qualify for state subsidies that do pay out.</li>
           </ul>

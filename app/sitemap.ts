@@ -22,7 +22,7 @@ const REVIEWED = {
   '/second-baby-cost':                  '2026-05-18', // OBBBA FSA cap fix
   '/registry-essentials':               '2026-05-17',
   '/state-childcare-costs':             '2026-04-30', // state CSV last reviewed
-  '/maternity-leave-by-state':          '2026-05-01', // state_leave CSV last reviewed
+  '/maternity-leave-by-state':          '2026-05-19', // state_leave CSV refresh after rate audit
   '/monthly-baby-budget':               '2026-05-08',
   '/daycare-vs-nanny-cost':             '2026-05-08',
   '/methodology':                       '2026-05-18',

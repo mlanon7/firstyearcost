@@ -23,24 +23,25 @@ import { tipsFiling } from '@/content/optionTips';
 //
 // 2026 rules implemented (OBBBA-adjusted):
 //   - Qualifying CDCTC expense cap: $3,000 (1 child) / $6,000 (2+).
-//   - CDCTC max rate raised from 35% to 50% (OBBBA).
-//   - CDCTC slides toward a 20% floor as AGI rises. Schedule:
-//       Single/HOH:  ≤$15k → 50% | $15k–$75k → 35% | $75k–$103k → 35%→20% | >$103k → 20%
-//       MFJ:         ≤$30k → 50% | $30k–$150k → 35% | $150k–$206k → 35%→20% | >$206k → 20%
-//       MFS:         half of MFJ thresholds.
-//   - FSA cap raised from $5,000 to $7,500 (MFS: $2,500 → $3,750), effective 2026.
+//   - CDCTC max rate raised from 35% to 50% (OBBBA §70405).
+//   - CDCTC implements the exact two-phase statutory step function from
+//     IRC §21(a)(2) as amended. See lib/subsidy.ts:cdctcRate for the precise
+//     bracket-by-bracket math (Math.ceil over $2,000 / $4,000 increments).
+//     Bracket points produced:
+//       Single/HOH/MFS: 50% at $15k → 35% floor at $43,001 → flat to $75k
+//                       → 20% floor at $105,001+
+//       MFJ:            50% at $30k → 35% floor at $86,001 → flat to $150k
+//                       → 20% floor at $210,001+
+//   - FSA cap raised from $5,000 to $7,500 (MFS: $2,500 → $3,750), effective 2026
+//     (OBBBA §70404).
 //   - FSA dollars are EXCLUDED from CDCTC qualifying base (no double dip).
 //
 // References:
 //   - IRS Pub 503 (Child and Dependent Care Expenses)
 //   - IRS Pub 15-B (Employer's Tax Guide to Fringe Benefits) — 2026 ed.
-//   - One Big Beautiful Bill Act, §70505 (FSA increase) and §70504 (CDCTC reform)
+//   - Congress.gov H.R.1 (P.L. 119-21), §70404 (FSA) and §70405 (CDCTC)
 //
 // Caveats:
-//   - The phase-out between $75k–$103k (single) and $150k–$206k (MFJ) is
-//     modeled as a smooth linear glide. Statutory text uses discrete 1pp
-//     steps per $2,000 (single) / $4,000 (MFJ) bands. Difference is at most
-//     a few dollars; not material at planning precision.
 //   - State CDCTC equivalents stack on top; not modeled here.
 //   - Non-refundable: doesn't generate a refund beyond your tax liability.
 

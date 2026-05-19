@@ -8,7 +8,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { AffiliateLink, AffiliateDisclosure } from '@/components/AffiliateLink';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 const URL = 'https://firstyearcost.com/registry-essentials';
 
@@ -76,6 +76,13 @@ export default function Page() {
       <BreadcrumbsJsonLd
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Registry essentials', url: URL },
+        ]}
+      />
+      <VisibleBreadcrumbs
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Gear', url: 'https://firstyearcost.com/baby-gear-budget' },
           { name: 'Registry essentials', url: URL },
         ]}
       />
