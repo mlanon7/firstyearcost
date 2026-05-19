@@ -1,0 +1,71 @@
+name: CI
+
+# Runs on every PR and every push to main.
+# Required gates before a change can land:
+#   1. CSV data validates (source IDs resolve, ordering invariants hold,
+#      expected row counts).
+#   2. Vitest suite passes.
+#   3. ESLint reports zero warnings/errors.
+#   4. TypeScript compiles with --noEmit.
+#   5. Next.js production build succeeds (catches edge-runtime issues,
+#      static prerender failures, and dynamic-route generation errors).
+#
+# Branch protection (configure once in GitHub settings -> Branches -> add
+# rule for `main`): require this workflow to pass before merge.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch: # manual trigger from the Actions tab
+
+# Cancel in-progress runs for the same branch / PR when a new commit lands.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: validate + test + lint + typecheck + build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        # Use `npm ci` instead of `npm install`: deterministic, fails fast
+        # on lockfile drift, faster in CI than a regular install.
+        run: npm ci
+
+      # 1. CSV data integrity. Fastest gate — runs before anything that
+      # touches Next so a broken CSV fails the workflow in <5s.
+      - name: Validate CSV data
+        run: npm run validate-data
+
+      # 2. Unit tests. Pure functions only — fast.
+      - name: Run tests
+        run: npm test
+
+      # 3. ESLint. Uses .eslintrc.json + next/core-web-vitals.
+      - name: Lint
+        run: npm run lint
+
+      # 4. TypeScript. --noEmit catches type errors that the build might
+      # otherwise mask.
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      # 5. Next.js production build. Catches static-prerender failures
+      # (e.g., the /icon route bug we hit), dynamic route generation
+      # issues, and any CSV imports that fail at build time.
+      - name: Build
+        run: npm run build
