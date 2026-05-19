@@ -1,6 +1,8 @@
 'use client';
 
-type Option<T extends string> = { value: T; label: string };
+import { InfoTip, type TipContent } from './InfoTip';
+
+type Option<T extends string> = { value: T; label: string; info?: TipContent };
 
 export function Segmented<T extends string>({
   value,
@@ -20,7 +22,7 @@ export function Segmented<T extends string>({
         const isUncertainty =
           opt.value === 'unsure' || opt.value === 'unknown';
         const muted = isUncertainty && value !== opt.value ? 'opacity-70' : '';
-        return (
+        const button = (
           <button
             key={opt.value}
             type="button"
@@ -32,6 +34,11 @@ export function Segmented<T extends string>({
             {opt.label}
           </button>
         );
+        return opt.info ? (
+          <InfoTip key={opt.value} content={opt.info}>
+            {button}
+          </InfoTip>
+        ) : button;
       })}
     </div>
   );

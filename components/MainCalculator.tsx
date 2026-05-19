@@ -16,6 +16,11 @@ import { StatCard } from './StatCard';
 import { BreakdownBar } from './BreakdownBar';
 import { Disclaimer } from './Disclaimer';
 import { formatUSD } from '@/lib/format';
+import {
+  tipsFirstBaby, tipsChildcare, tipsFeeding, tipsFormulaType,
+  tipsDiapers, tipsDiaperBrand, tipsGearTier, tipsGearUsed,
+  tipsRegistry, tipsInsurance, tipsDelivery,
+} from '@/content/optionTips';
 
 // Recharts is ~80kB gzipped — load it only on the client and only when the
 // calculator renders, so it doesn't bloat the homepage's initial JS bundle.
@@ -31,7 +36,23 @@ export function MainCalculator() {
   const result = useMemo(() => calculate(inputs), [inputs]);
 
   function setField<K extends keyof CalculatorInputs>(k: K, v: CalculatorInputs[K]) {
-    setInputs((prev) => ({ ...prev, [k]: v }));
+    setInputs((prev) => {
+      const next = { ...prev, [k]: v };
+      // When the user picks a plan with no paid childcare, zero the months
+      // slider so it doesn't display a stale value. When they switch back to
+      // a paid plan from one of those, restore a sensible default — but only
+      // if the current value is 0 (to avoid clobbering an intentional setting).
+      if (k === 'childcarePlan') {
+        const newPlan = v as CalculatorInputs['childcarePlan'];
+        const noPaid = newPlan === 'none' || newPlan === 'family';
+        if (noPaid) {
+          next.childcareMonths = 0;
+        } else if (prev.childcareMonths === 0) {
+          next.childcareMonths = 9;
+        }
+      }
+      return next;
+    });
   }
 
   function applyPreset(p: typeof presets[number]) {
@@ -136,8 +157,8 @@ export function MainCalculator() {
                 value={inputs.isFirstBaby ? 'yes' : 'no'}
                 onChange={(v) => setField('isFirstBaby', v === 'yes')}
                 options={[
-                  { value: 'yes', label: 'First baby' },
-                  { value: 'no',  label: 'Additional child' },
+                  { value: 'yes', label: 'First baby',       info: tipsFirstBaby.yes },
+                  { value: 'no',  label: 'Additional child', info: tipsFirstBaby.no  },
                 ]}
                 ariaLabel="First baby?"
               />
@@ -158,14 +179,14 @@ export function MainCalculator() {
                 onChange={(v) => setField('childcarePlan', v)}
                 ariaLabel="Childcare plan"
                 options={[
-                  { value: 'centerCare',  label: 'Center daycare' },
-                  { value: 'homeCare',    label: 'Home daycare' },
-                  { value: 'nanny',       label: 'Nanny' },
-                  { value: 'nannyShare',  label: 'Nanny share' },
-                  { value: 'partTime',    label: 'Part-time' },
-                  { value: 'family',      label: 'Family help' },
-                  { value: 'none',        label: 'None' },
-                  { value: 'unsure',      label: 'Unsure' },
+                  { value: 'centerCare',  label: 'Center daycare', info: tipsChildcare.centerCare },
+                  { value: 'homeCare',    label: 'Home daycare',   info: tipsChildcare.homeCare   },
+                  { value: 'nanny',       label: 'Nanny',          info: tipsChildcare.nanny      },
+                  { value: 'nannyShare',  label: 'Nanny share',    info: tipsChildcare.nannyShare },
+                  { value: 'partTime',    label: 'Part-time',      info: tipsChildcare.partTime   },
+                  { value: 'family',      label: 'Family help',    info: tipsChildcare.family     },
+                  { value: 'none',        label: 'None',           info: tipsChildcare.none       },
+                  { value: 'unsure',      label: 'Unsure',         info: tipsChildcare.unsure     },
                 ]}
               />
             </div>
@@ -177,8 +198,15 @@ export function MainCalculator() {
                 value={inputs.childcareMonths}
                 onChange={(v) => setField('childcareMonths', v)}
                 suffix="mo"
+                disabled={inputs.childcarePlan === 'none' || inputs.childcarePlan === 'family'}
               />
-              <p className="help">Many parents start daycare around month 3–4 after parental leave.</p>
+              <p className="help">
+                {inputs.childcarePlan === 'none'
+                  ? 'No paid childcare planned — slider locked at 0. Pick a paid plan above to model months.'
+                  : inputs.childcarePlan === 'family'
+                  ? 'Family help is unpaid — slider locked at 0. Pick a paid plan above to model months.'
+                  : 'Many parents start daycare around month 3–4 after parental leave.'}
+              </p>
             </div>
           </div>
 
@@ -195,10 +223,10 @@ export function MainCalculator() {
                 onChange={(v) => setField('feedingPlan', v)}
                 ariaLabel="Feeding plan"
                 options={[
-                  { value: 'breastfeeding', label: 'Breastfeeding' },
-                  { value: 'formula',       label: 'Formula' },
-                  { value: 'combo',         label: 'Combo' },
-                  { value: 'unsure',        label: 'Unsure' },
+                  { value: 'breastfeeding', label: 'Breastfeeding', info: tipsFeeding.breastfeeding },
+                  { value: 'formula',       label: 'Formula',       info: tipsFeeding.formula       },
+                  { value: 'combo',         label: 'Combo',         info: tipsFeeding.combo         },
+                  { value: 'unsure',        label: 'Unsure',        info: tipsFeeding.unsure        },
                 ]}
               />
               <p className="help">No judgment — pick whatever fits your situation. We don't give feeding advice.</p>
@@ -211,10 +239,10 @@ export function MainCalculator() {
                   onChange={(v) => setField('formulaType', v)}
                   ariaLabel="Formula type"
                   options={[
-                    { value: 'standardPowder', label: 'Standard powder' },
-                    { value: 'sensitive',      label: 'Sensitive' },
-                    { value: 'hypoallergenic', label: 'Hypoallergenic' },
-                    { value: 'readyToFeed',    label: 'Ready-to-feed' },
+                    { value: 'standardPowder', label: 'Standard powder', info: tipsFormulaType.standardPowder },
+                    { value: 'sensitive',      label: 'Sensitive',       info: tipsFormulaType.sensitive      },
+                    { value: 'hypoallergenic', label: 'Hypoallergenic',  info: tipsFormulaType.hypoallergenic },
+                    { value: 'readyToFeed',    label: 'Ready-to-feed',   info: tipsFormulaType.readyToFeed    },
                   ]}
                 />
               </div>
@@ -235,10 +263,10 @@ export function MainCalculator() {
                   onChange={(v) => setField('diaperPlan', v)}
                   ariaLabel="Diaper plan"
                   options={[
-                    { value: 'disposable', label: 'Disposable' },
-                    { value: 'cloth',      label: 'Cloth' },
-                    { value: 'mix',        label: 'Mix' },
-                    { value: 'unsure',     label: 'Unsure' },
+                    { value: 'disposable', label: 'Disposable', info: tipsDiapers.disposable },
+                    { value: 'cloth',      label: 'Cloth',      info: tipsDiapers.cloth      },
+                    { value: 'mix',        label: 'Mix',        info: tipsDiapers.mix        },
+                    { value: 'unsure',     label: 'Unsure',     info: tipsDiapers.unsure     },
                   ]}
                 />
               </div>
@@ -249,9 +277,9 @@ export function MainCalculator() {
                   onChange={(v) => setField('diaperBrand', v)}
                   ariaLabel="Diaper brand"
                   options={[
-                    { value: 'budget',     label: 'Budget' },
-                    { value: 'mainstream', label: 'Mainstream' },
-                    { value: 'premium',    label: 'Premium' },
+                    { value: 'budget',     label: 'Budget',     info: tipsDiaperBrand.budget     },
+                    { value: 'mainstream', label: 'Mainstream', info: tipsDiaperBrand.mainstream },
+                    { value: 'premium',    label: 'Premium',    info: tipsDiaperBrand.premium    },
                   ]}
                 />
               </div>
@@ -272,9 +300,9 @@ export function MainCalculator() {
                   onChange={(v) => setField('gearTier', v)}
                   ariaLabel="Gear tier"
                   options={[
-                    { value: 'budget',   label: 'Budget' },
-                    { value: 'standard', label: 'Standard' },
-                    { value: 'premium',  label: 'Premium' },
+                    { value: 'budget',   label: 'Budget',   info: tipsGearTier.budget   },
+                    { value: 'standard', label: 'Standard', info: tipsGearTier.standard },
+                    { value: 'premium',  label: 'Premium',  info: tipsGearTier.premium  },
                   ]}
                 />
               </div>
@@ -285,8 +313,8 @@ export function MainCalculator() {
                   onChange={(v) => setField('gearUsed', v === 'yes')}
                   ariaLabel="Used gear"
                   options={[
-                    { value: 'yes', label: 'Yes' },
-                    { value: 'no',  label: 'Mostly new' },
+                    { value: 'yes', label: 'Yes',        info: tipsGearUsed.yes },
+                    { value: 'no',  label: 'Mostly new', info: tipsGearUsed.no  },
                   ]}
                 />
               </div>
@@ -298,9 +326,9 @@ export function MainCalculator() {
                 onChange={(v) => setField('registryHelp', v)}
                 ariaLabel="Registry help"
                 options={[
-                  { value: 'low',    label: 'Low' },
-                  { value: 'medium', label: 'Medium' },
-                  { value: 'high',   label: 'High' },
+                  { value: 'low',    label: 'Low',    info: tipsRegistry.low    },
+                  { value: 'medium', label: 'Medium', info: tipsRegistry.medium },
+                  { value: 'high',   label: 'High',   info: tipsRegistry.high   },
                 ]}
               />
               <p className="help">Reduces the out-of-pocket gear cost by an assumed coverage %.</p>
@@ -321,10 +349,10 @@ export function MainCalculator() {
                   onChange={(v) => setField('insurance', v)}
                   ariaLabel="Insurance"
                   options={[
-                    { value: 'employer',    label: 'Employer plan' },
-                    { value: 'marketplace', label: 'Marketplace' },
-                    { value: 'medicaid',    label: 'Medicaid' },
-                    { value: 'uninsured',   label: 'Uninsured / unsure' },
+                    { value: 'employer',    label: 'Employer plan',     info: tipsInsurance.employer    },
+                    { value: 'marketplace', label: 'Marketplace',       info: tipsInsurance.marketplace },
+                    { value: 'medicaid',    label: 'Medicaid',          info: tipsInsurance.medicaid    },
+                    { value: 'uninsured',   label: 'Uninsured / unsure',info: tipsInsurance.uninsured   },
                   ]}
                 />
               </div>
@@ -335,9 +363,9 @@ export function MainCalculator() {
                   onChange={(v) => setField('delivery', v)}
                   ariaLabel="Delivery"
                   options={[
-                    { value: 'unknown',  label: 'Unknown' },
-                    { value: 'vaginal',  label: 'Vaginal' },
-                    { value: 'csection', label: 'C-section' },
+                    { value: 'unknown',  label: 'Unknown',   info: tipsDelivery.unknown  },
+                    { value: 'vaginal',  label: 'Vaginal',   info: tipsDelivery.vaginal  },
+                    { value: 'csection', label: 'C-section', info: tipsDelivery.csection },
                   ]}
                 />
               </div>
