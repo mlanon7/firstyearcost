@@ -1,0 +1,7 @@
+id,name,blurb,childcarePlan,feedingPlan,formulaType,diaperPlan,gearTier,gearUsed,registryHelp,childcareMonths,isFirstBaby
+family-help,Budget with family help,"Family covers childcare, mostly hand-me-downs, breastfeeding.",family,breastfeeding,,disposable,budget,true,medium,0,
+daycare-3mo,Daycare after 3 months,"Standard daycare from month 4 onward, mainstream brands, mixed feeding.",centerCare,combo,,disposable,standard,false,medium,9,
+nanny-share,Nanny share,"Two-family nanny share starting at 4 months, premium feeding setup.",nannyShare,combo,,disposable,standard,false,medium,8,
+formula-feeding,Formula feeding,"Standard formula, mainstream gear, daycare after 4 months.",centerCare,formula,standardPowder,disposable,standard,false,medium,8,
+premium-gear,Premium setup,"Premium gear, all new, full daycare year, hypoallergenic formula.",centerCare,formula,sensitive,disposable,premium,false,low,12,
+second-baby,Second baby,"Reuses gear from first child, breastfeeding, family-home daycare.",homeCare,breastfeeding,,disposable,budget,true,high,9,false

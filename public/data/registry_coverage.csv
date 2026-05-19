@@ -1,0 +1,4 @@
+help_level,coverage_fraction
+low,0.20
+medium,0.45
+high,0.75

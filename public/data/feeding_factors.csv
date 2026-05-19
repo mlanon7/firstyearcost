@@ -1,0 +1,7 @@
+parameter,value,unit,notes
+combo_feeding_multiplier,0.55,fraction,"Share of full formula cost for combo feeding (vs. exclusive formula)"
+unsure_formula_share,0.7,fraction,"When feedingPlan=unsure, scale the formula portion by this fraction"
+unsure_supplies_low,200,usd,"When feedingPlan=unsure, low-bound supplies allowance"
+unsure_supplies_mid,400,usd,"When feedingPlan=unsure, mid-bound supplies allowance"
+unsure_supplies_high,700,usd,"When feedingPlan=unsure, high-bound supplies allowance"
+wipes_per_change,2.5,wipes,"Average wipes used per diaper change (used by diaper calculators)"

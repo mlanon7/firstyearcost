@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Next.js dev server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "Static file server (local-server.js)",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["local-server.js"],
+      "port": 4173
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+insurance,on_separate,addon_usd
+employer,yes,800
+employer,unsure,300
+employer,no,0
+marketplace,yes,1200
+marketplace,unsure,450
+marketplace,no,0
+medicaid,yes,0
+medicaid,unsure,0
+medicaid,no,0
+uninsured,yes,0
+uninsured,unsure,0
+uninsured,no,0

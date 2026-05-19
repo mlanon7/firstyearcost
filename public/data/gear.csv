@@ -1,0 +1,21 @@
+item_key,label,budget_usd,standard_usd,premium_usd,must_have,safety_new,can_delay,tag
+crib,Crib,180,350,700,1,1,0,sleep
+mattress,Crib mattress,90,160,280,1,1,0,sleep
+bassinet,Bassinet,100,220,450,0,0,0,sleep
+changingPad,Changing pad,30,60,120,1,0,0,nursery
+carSeat,Infant car seat,130,250,450,1,1,0,travel
+stroller,Stroller,130,350,800,1,0,0,travel
+carrier,Baby carrier,50,130,220,0,0,1,travel
+monitor,Baby monitor,50,150,380,1,0,0,nursery
+highChair,High chair,70,160,320,1,0,1,feeding
+bouncerSeat,Bouncer / seat,40,90,180,0,0,1,play
+dresser,Dresser,120,280,600,0,0,1,nursery
+diaperBag,Diaper bag,30,80,200,1,0,0,travel
+bottleSet,Bottle set,25,60,130,1,0,0,feeding
+swaddles,Swaddles / sleep sacks,30,60,120,1,0,0,sleep
+thermometer,Thermometer,15,30,70,1,0,0,health
+bathtub,Infant bathtub,25,50,110,0,0,1,bathing
+playmat,Play mat,30,70,150,0,0,1,play
+bedding,"Bedding (sheets, etc.)",60,120,240,1,0,0,sleep
+nightlight,Nightlight,15,30,70,0,0,0,nursery
+babybook,Baby book / keepsake,15,30,60,0,0,1,misc
