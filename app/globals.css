@@ -203,11 +203,9 @@ input.input:focus {
   box-shadow: 0 0 0 3px rgba(199,95,62,0.22);
 }
 
-/* Segmented control
-   Structure: .segmented > .segmented-item > [.chip, .info-trigger?]
-   The chip is the click target; the info-trigger is a small ⓘ button that
-   opens an InfoTip popover. They live side-by-side inside the segmented-item
-   so the InfoTip popover positions correctly relative to the icon. */
+/* Segmented control — clean chip strip with no per-option icons.
+   Rich option context lives in a single (?) icon next to the field label,
+   handled by the OptionsInfo component. See `.options-info-card` below. */
 .segmented {
   display: inline-flex;
   flex-wrap: wrap;
@@ -217,12 +215,8 @@ input.input:focus {
   border: 1px solid rgb(var(--line));
   border-radius: 0.75rem;
 }
-.segmented-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.125rem;
-}
-.segmented .chip {
+.segmented .chip,
+.segmented > button {
   padding: 0.45rem 0.85rem;
   border-radius: 0.5rem;
   font-size: 0.875rem;
@@ -237,23 +231,25 @@ input.input:focus {
     box-shadow 0.18s ease;
   cursor: pointer;
 }
-.segmented .chip:hover { color: rgb(var(--ink)); background: rgba(255,250,242,0.6); }
-.segmented .chip:focus-visible {
+.segmented .chip:hover,
+.segmented > button:hover {
+  color: rgb(var(--ink));
+  background: rgba(255,250,242,0.6);
+}
+.segmented .chip:focus-visible,
+.segmented > button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px rgb(var(--teal));
 }
-.segmented .chip.active {
+.segmented .chip.active,
+.segmented > button.active {
   background: rgb(var(--bg-elev));
   color: rgb(var(--ink));
   border-color: rgb(var(--line));
   box-shadow: 0 1px 2px rgba(72,48,24,0.08);
 }
 
-/* Info trigger — small ⓘ icon next to each chip. Subtle at rest; warmer on
-   hover so it's discoverable but doesn't compete with chip labels.
-   Sized small enough that the natural sweep path across chips rarely lands
-   on it — combined with the 350ms hover delay in InfoTip, this keeps the
-   tooltip strictly opt-in. */
+/* Help icon next to field labels — small, subtle, opt-in. */
 .info-trigger {
   display: inline-flex;
   align-items: center;
@@ -268,13 +264,51 @@ input.input:focus {
   transition: color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
 }
 .info-trigger:hover,
-.info-trigger:focus-visible {
+.info-trigger:focus-visible,
+.info-trigger[aria-expanded="true"] {
   color: rgb(var(--teal));
   background: rgb(var(--teal-soft));
   outline: none;
   transform: scale(1.1);
 }
-.segmented-item:has(> .chip.active) .info-trigger { color: rgb(var(--teal)); }
+
+/* Section-level options popover — wider than the single-tip card so it can
+   list every option for the segmented control above. Same warm cream
+   styling, soft warm shadow, slow soft fade-slide entry. */
+.options-info-card {
+  position: absolute;
+  z-index: 50;
+  width: min(22rem, 88vw);
+  padding: 1rem;
+  background: rgb(var(--bg-elev));
+  border: 1px solid rgb(var(--line));
+  border-radius: 0.875rem;
+  box-shadow:
+    0 1px 3px rgba(72, 48, 24, 0.08),
+    0 8px 24px rgba(72, 48, 24, 0.10),
+    0 24px 48px rgba(72, 48, 24, 0.10);
+  text-align: left;
+  animation: options-info-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: top left;
+}
+@keyframes options-info-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.options-info-arrow {
+  position: absolute;
+  left: 0.6rem;
+  top: -5px;
+  transform: rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: rgb(var(--bg-elev));
+  border-left: 1px solid rgb(var(--line));
+  border-top: 1px solid rgb(var(--line));
+}
+@media (prefers-reduced-motion: reduce) {
+  .options-info-card { animation: none; }
+}
 
 /* InfoTip popover card — warm cream surface, soft warm shadow, slow soft
    fade-slide entry animation. */

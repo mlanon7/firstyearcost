@@ -152,17 +152,16 @@ export function MainCalculator() {
             </div>
 
             <div>
-              <label className="label">First baby?</label>
               <Segmented
+                label="First baby?"
                 value={inputs.isFirstBaby ? 'yes' : 'no'}
                 onChange={(v) => setField('isFirstBaby', v === 'yes')}
                 options={[
                   { value: 'yes', label: 'First baby',       info: tipsFirstBaby.yes },
                   { value: 'no',  label: 'Additional child', info: tipsFirstBaby.no  },
                 ]}
-                ariaLabel="First baby?"
+                help="Additional children typically reuse gear & clothes."
               />
-              <p className="help">Additional children typically reuse gear & clothes.</p>
             </div>
           </div>
 
@@ -173,11 +172,10 @@ export function MainCalculator() {
               Childcare
             </h4>
             <div>
-              <label className="label">Childcare plan</label>
               <Segmented
+                label="Childcare plan"
                 value={inputs.childcarePlan}
                 onChange={(v) => setField('childcarePlan', v)}
-                ariaLabel="Childcare plan"
                 options={[
                   { value: 'centerCare',  label: 'Center daycare', info: tipsChildcare.centerCare },
                   { value: 'homeCare',    label: 'Home daycare',   info: tipsChildcare.homeCare   },
@@ -217,27 +215,25 @@ export function MainCalculator() {
               Feeding
             </h4>
             <div>
-              <label className="label">Feeding plan</label>
               <Segmented
+                label="Feeding plan"
                 value={inputs.feedingPlan}
                 onChange={(v) => setField('feedingPlan', v)}
-                ariaLabel="Feeding plan"
                 options={[
                   { value: 'breastfeeding', label: 'Breastfeeding', info: tipsFeeding.breastfeeding },
                   { value: 'formula',       label: 'Formula',       info: tipsFeeding.formula       },
                   { value: 'combo',         label: 'Combo',         info: tipsFeeding.combo         },
                   { value: 'unsure',        label: 'Unsure',        info: tipsFeeding.unsure        },
                 ]}
+                help="No judgment — pick whatever fits your situation. We don't give feeding advice."
               />
-              <p className="help">No judgment — pick whatever fits your situation. We don't give feeding advice.</p>
             </div>
             {(inputs.feedingPlan === 'formula' || inputs.feedingPlan === 'combo') && (
               <div>
-                <label className="label">Formula type</label>
                 <Segmented
+                  label="Formula type"
                   value={inputs.formulaType ?? 'standardPowder'}
                   onChange={(v) => setField('formulaType', v)}
-                  ariaLabel="Formula type"
                   options={[
                     { value: 'standardPowder', label: 'Standard powder', info: tipsFormulaType.standardPowder },
                     { value: 'sensitive',      label: 'Sensitive',       info: tipsFormulaType.sensitive      },
@@ -257,11 +253,10 @@ export function MainCalculator() {
             </h4>
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="label">Diaper plan</label>
                 <Segmented
+                  label="Diaper plan"
                   value={inputs.diaperPlan}
                   onChange={(v) => setField('diaperPlan', v)}
-                  ariaLabel="Diaper plan"
                   options={[
                     { value: 'disposable', label: 'Disposable', info: tipsDiapers.disposable },
                     { value: 'cloth',      label: 'Cloth',      info: tipsDiapers.cloth      },
@@ -271,11 +266,10 @@ export function MainCalculator() {
                 />
               </div>
               <div>
-                <label className="label">Brand tier</label>
                 <Segmented
+                  label="Brand tier"
                   value={inputs.diaperBrand}
                   onChange={(v) => setField('diaperBrand', v)}
-                  ariaLabel="Diaper brand"
                   options={[
                     { value: 'budget',     label: 'Budget',     info: tipsDiaperBrand.budget     },
                     { value: 'mainstream', label: 'Mainstream', info: tipsDiaperBrand.mainstream },
@@ -294,11 +288,10 @@ export function MainCalculator() {
             </h4>
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="label">Gear style</label>
                 <Segmented
+                  label="Gear style"
                   value={inputs.gearTier}
                   onChange={(v) => setField('gearTier', v)}
-                  ariaLabel="Gear tier"
                   options={[
                     { value: 'budget',   label: 'Budget',   info: tipsGearTier.budget   },
                     { value: 'standard', label: 'Standard', info: tipsGearTier.standard },
@@ -307,11 +300,10 @@ export function MainCalculator() {
                 />
               </div>
               <div>
-                <label className="label">Used / hand-me-down OK?</label>
                 <Segmented
+                  label="Used / hand-me-down OK?"
                   value={inputs.gearUsed ? 'yes' : 'no'}
                   onChange={(v) => setField('gearUsed', v === 'yes')}
-                  ariaLabel="Used gear"
                   options={[
                     { value: 'yes', label: 'Yes',        info: tipsGearUsed.yes },
                     { value: 'no',  label: 'Mostly new', info: tipsGearUsed.no  },
@@ -320,18 +312,17 @@ export function MainCalculator() {
               </div>
             </div>
             <div>
-              <label className="label">Registry / shower help</label>
               <Segmented
+                label="Registry / shower help"
                 value={inputs.registryHelp}
                 onChange={(v) => setField('registryHelp', v)}
-                ariaLabel="Registry help"
                 options={[
                   { value: 'low',    label: 'Low',    info: tipsRegistry.low    },
                   { value: 'medium', label: 'Medium', info: tipsRegistry.medium },
                   { value: 'high',   label: 'High',   info: tipsRegistry.high   },
                 ]}
+                help="Reduces the out-of-pocket gear cost by an assumed coverage %."
               />
-              <p className="help">Reduces the out-of-pocket gear cost by an assumed coverage %.</p>
             </div>
           </div>
 
@@ -343,11 +334,10 @@ export function MainCalculator() {
             </h4>
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="label">Insurance type</label>
                 <Segmented
+                  label="Insurance type"
                   value={inputs.insurance}
                   onChange={(v) => setField('insurance', v)}
-                  ariaLabel="Insurance"
                   options={[
                     { value: 'employer',    label: 'Employer plan',     info: tipsInsurance.employer    },
                     { value: 'marketplace', label: 'Marketplace',       info: tipsInsurance.marketplace },
@@ -357,11 +347,10 @@ export function MainCalculator() {
                 />
               </div>
               <div>
-                <label className="label">Expected delivery</label>
                 <Segmented
+                  label="Expected delivery"
                   value={inputs.delivery}
                   onChange={(v) => setField('delivery', v)}
-                  ariaLabel="Delivery"
                   options={[
                     { value: 'unknown',  label: 'Unknown',   info: tipsDelivery.unknown  },
                     { value: 'vaginal',  label: 'Vaginal',   info: tipsDelivery.vaginal  },
