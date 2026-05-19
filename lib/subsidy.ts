@@ -11,21 +11,49 @@ export type Filing = 'single' | 'hoh' | 'mfj' | 'mfs';
  * Child & Dependent Care Tax Credit rate for the given AGI and filing status.
  * Returns a fraction in [0.20, 0.50].
  *
- * 2026 schedule (OBBBA):
- *   Single/HOH/MFS:  ≤$15k → 50% | $15k–$75k → 35% flat | $75k–$103k → linear 35→20 | >$103k → 20%
- *   MFJ:             ≤$30k → 50% | $30k–$150k → 35% flat | $150k–$206k → linear 35→20 | >$206k → 20%
+ * 2026 statutory schedule (One Big Beautiful Bill Act, modifying IRC §21(a)(2)):
+ *
+ *   Two-phase step function, anchored at thresholds T1 and T2:
+ *     - Phase 0: AGI ≤ T1 → 50%
+ *     - Phase 1 (AGI in (T1, T2]): start at 50%, reduce by 1 percentage point
+ *       for each full or partial increment of $STEP above T1, floored at 35%.
+ *     - Phase 2 (AGI > T2): start at 35%, reduce by 1 percentage point
+ *       for each full or partial increment of $STEP above T2, floored at 20%.
+ *
+ *   The "fraction thereof" language is implemented via Math.ceil.
+ *
+ *   Thresholds and step sizes:
+ *     Single / HOH / MFS:  T1=$15,000  T2=$75,000   STEP=$2,000
+ *     Married filing jointly: T1=$30,000 T2=$150,000 STEP=$4,000
+ *
+ *   Bracket points produced:
+ *     Single: 50% at $15,000 → reaches 35% floor at $43,001 → flat 35% to
+ *       $75,000 → reaches 20% floor at $105,001+.
+ *     MFJ:    50% at $30,000 → reaches 35% floor at $86,001 → flat 35% to
+ *       $150,000 → reaches 20% floor at $210,001+.
+ *
+ * References:
+ *   - Congress.gov H.R.1 (P.L. 119-21) §70404 and §70405 (CDCTC amendments)
+ *   - IRS Publication 503 (2026)
+ *   - IRS Publication 505 (2026), worksheet for child & dependent care credit
  */
 export function cdctcRate(agi: number, filing: Filing): number {
-  const scale = filing === 'mfj' ? 2 : 1;
-  const t50 = 15000 * scale;
-  const tFlat = 75000 * scale;
-  const tFloor = 103000 * scale;
+  const isMfj = filing === 'mfj';
+  const t1   = isMfj ?  30_000 : 15_000;
+  const t2   = isMfj ? 150_000 : 75_000;
+  const step = isMfj ?   4_000 :  2_000;
 
-  if (agi <= t50) return 0.50;
-  if (agi <= tFlat) return 0.35;
-  if (agi >= tFloor) return 0.20;
-  const pos = (agi - tFlat) / (tFloor - tFlat);
-  return 0.35 - 0.15 * pos;
+  if (agi <= t1) return 0.50;
+
+  if (agi <= t2) {
+    // Phase 1: 50% reducing 1pp per (full or partial) STEP above T1, floor 35%.
+    const reductions = Math.ceil((agi - t1) / step);
+    return Math.max(0.35, 0.50 - reductions * 0.01);
+  }
+
+  // Phase 2: 35% reducing 1pp per (full or partial) STEP above T2, floor 20%.
+  const reductions = Math.ceil((agi - t2) / step);
+  return Math.max(0.20, 0.35 - reductions * 0.01);
 }
 
 /** 2026 dependent-care FSA exclusion cap per OBBBA. */

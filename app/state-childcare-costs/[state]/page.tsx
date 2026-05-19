@@ -94,7 +94,7 @@ export default function Page({ params }: { params: { state: string } }) {
       <section className="container-pg pb-10">
         <SectionHeader title={`Calculator: childcare cost in ${s.name}`} eyebrow="Run your numbers" />
         <div className="mt-6">
-          <ChildcareCalculator />
+          <ChildcareCalculator initialStateCode={s.code} />
         </div>
       </section>
 

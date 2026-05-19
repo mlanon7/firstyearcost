@@ -33,7 +33,7 @@ const faq: FAQItem[] = [
   },
   {
     q: 'Are store-brand diapers worse?',
-    a: "Store-brand diapers from Costco's Kirkland, Target's Up & Up, and Amazon's Mama Bear consistently rank well in independent reviews and are usually 30–50% cheaper per diaper than name brands. Many parents mix: name brand at night, store brand during the day.",
+    a: "Store-brand diapers (for example Costco's Kirkland, Target's Up & Up, Amazon's Mama Bear) are commonly recommended by parent communities and are usually 30–50% cheaper per diaper than name brands. Performance varies by baby; many parents mix — store brand by day, a preferred brand at night. Don't assume all brands fit equally well; buy small packs of two or three before committing to a case.",
   },
   {
     q: 'Is cloth diapering actually cheaper?',

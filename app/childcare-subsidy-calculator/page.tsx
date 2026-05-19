@@ -36,7 +36,7 @@ const faq: FAQItem[] = [
   },
   {
     q: 'How much can I put in a Dependent Care FSA in 2026?',
-    a: 'The federal cap was raised to $7,500 per household for single filers, head-of-household, and married filing jointly (up from $5,000), or $3,750 if married filing separately (up from $2,500). This is the first increase since 1986 and took effect with the 2026 plan year under OBBBA. Some employers offer a higher limit through a "highly compensated employee" reduction — check with HR. Unused funds at year-end are forfeited unless your plan allows a carryover or grace period.',
+    a: 'The federal cap was raised to $7,500 per household for single filers, head-of-household, and married filing jointly (up from $5,000), or $3,750 if married filing separately (up from $2,500). This is the first increase since 1986 and took effect with the 2026 plan year under OBBBA. Note: IRS nondiscrimination rules can require your employer to *reduce* the amount that highly compensated employees may exclude — these rules lower the cap for HCEs, they do not raise it. Unused funds at year-end are forfeited unless your plan allows a carryover or grace period.',
   },
   {
     q: 'Do states have their own childcare tax credits?',

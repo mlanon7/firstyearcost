@@ -13,8 +13,10 @@ import { formatUSD, formatPercent } from '@/lib/format';
 
 type CareType = 'centerCare' | 'homeCare' | 'nanny' | 'nannyShare' | 'partTime';
 
-export function ChildcareCalculator() {
-  const [stateCode, setStateCode] = useState<StateCode>('CA');
+export function ChildcareCalculator({
+  initialStateCode = 'CA',
+}: { initialStateCode?: StateCode } = {}) {
+  const [stateCode, setStateCode] = useState<StateCode>(initialStateCode);
   const [careType, setCareType] = useState<CareType>('centerCare');
   const [hoursPerWeek, setHoursPerWeek] = useState(40);
   const [months, setMonths] = useState(9);

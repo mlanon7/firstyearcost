@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { track } from '@/lib/analytics';
 import { formatUSD } from '@/lib/format';
 import { StatCard } from '@/components/StatCard';
 import { calcSubsidy, type Filing } from '@/lib/subsidy';
@@ -131,12 +130,9 @@ export function SubsidyCalculator() {
           </p>
         </div>
 
-        <button
-          className="btn btn-ghost text-sm w-full"
-          onClick={() => track('subsidy_estimator_run', { filing, agi, kids, spend, fsa })}
-        >
-          Update estimate
-        </button>
+        <p className="text-xs text-ink-500 italic">
+          Estimate updates as you type — no button to press. State CDCTC equivalents (CA, NY, MN, OR, VT, and others) stack on top and are not modeled here.
+        </p>
       </div>
 
       <div className="space-y-4">

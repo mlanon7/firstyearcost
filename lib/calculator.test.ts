@@ -108,57 +108,117 @@ describe('calculate() — first-year baby cost', () => {
 // Subsidy / tax-credit math (2026 OBBBA rules)
 // ============================================================================
 
-describe('cdctcRate() — 2026 OBBBA schedule', () => {
-  it('returns 50% at low AGI (single)', () => {
-    expect(cdctcRate(10_000, 'single')).toBe(0.50);
-    expect(cdctcRate(15_000, 'single')).toBe(0.50);
+// All expected values below are computed from the statutory 2026 step function
+// (OBBBA / IRC §21(a)(2)): 50% reduces 1pp per $2,000 above $15,000 (single)
+// or $4,000 above $30,000 (MFJ), floored at 35%; then 35% reduces 1pp per
+// $2,000 above $75,000 (single) or $4,000 above $150,000 (MFJ), floored at 20%.
+// Use a floating-point tolerance because 1pp arithmetic produces small drift.
+const r = (n: number) => Math.round(n * 1000) / 1000;
+
+describe('cdctcRate() — 2026 OBBBA statutory schedule', () => {
+  describe('Phase 0 (50% max)', () => {
+    it('single: 50% at and below $15,000', () => {
+      expect(cdctcRate(0, 'single')).toBe(0.50);
+      expect(cdctcRate(10_000, 'single')).toBe(0.50);
+      expect(cdctcRate(15_000, 'single')).toBe(0.50);
+    });
+    it('MFJ: 50% at and below $30,000', () => {
+      expect(cdctcRate(0, 'mfj')).toBe(0.50);
+      expect(cdctcRate(20_000, 'mfj')).toBe(0.50);
+      expect(cdctcRate(30_000, 'mfj')).toBe(0.50);
+    });
   });
 
-  it('returns 50% at low AGI (MFJ, doubled threshold)', () => {
-    expect(cdctcRate(20_000, 'mfj')).toBe(0.50);
-    expect(cdctcRate(30_000, 'mfj')).toBe(0.50);
+  describe('Phase 1 step-down (50% → 35%)', () => {
+    it('single $15,001 → 49% (1 step of 1pp)', () => {
+      expect(r(cdctcRate(15_001, 'single'))).toBe(0.49);
+    });
+    it('single $17,000 → 49% (still within first $2k bucket)', () => {
+      expect(r(cdctcRate(17_000, 'single'))).toBe(0.49);
+    });
+    it('single $17,001 → 48% (second step)', () => {
+      expect(r(cdctcRate(17_001, 'single'))).toBe(0.48);
+    });
+    it('single $25,000 → 45% (5 steps of $2k)', () => {
+      expect(r(cdctcRate(25_000, 'single'))).toBe(0.45);
+    });
+    it('single $43,000 → 36% (14 steps)', () => {
+      expect(r(cdctcRate(43_000, 'single'))).toBe(0.36);
+    });
+    it('single $43,001 → 35% floor (15 steps would give 35%)', () => {
+      expect(r(cdctcRate(43_001, 'single'))).toBe(0.35);
+    });
+    it('single $60,000 → 35% (floor holds)', () => {
+      expect(r(cdctcRate(60_000, 'single'))).toBe(0.35);
+    });
+    it('MFJ $30,001 → 49% (1 step of $4k)', () => {
+      expect(r(cdctcRate(30_001, 'mfj'))).toBe(0.49);
+    });
+    it('MFJ $50,000 → 45% (5 steps)', () => {
+      expect(r(cdctcRate(50_000, 'mfj'))).toBe(0.45);
+    });
+    it('MFJ $86,001 → 35% floor (15 steps × $4k)', () => {
+      expect(r(cdctcRate(86_001, 'mfj'))).toBe(0.35);
+    });
+    it('MFJ $120,000 → 35% (floor holds within phase 1)', () => {
+      expect(r(cdctcRate(120_000, 'mfj'))).toBe(0.35);
+    });
+    it('MFJ $150,000 → 35% (still phase 1 floor)', () => {
+      expect(r(cdctcRate(150_000, 'mfj'))).toBe(0.35);
+    });
   });
 
-  it('drops to 35% above the maximum-rate threshold (single)', () => {
-    expect(cdctcRate(15_001, 'single')).toBe(0.35);
-    expect(cdctcRate(50_000, 'single')).toBe(0.35);
-    expect(cdctcRate(75_000, 'single')).toBe(0.35);
+  describe('Phase 2 step-down (35% → 20%)', () => {
+    it('single $75,000 → 35% (still phase 1)', () => {
+      expect(r(cdctcRate(75_000, 'single'))).toBe(0.35);
+    });
+    it('single $75,001 → 34% (phase 2 begins)', () => {
+      expect(r(cdctcRate(75_001, 'single'))).toBe(0.34);
+    });
+    it('single $89,000 → 28% (7 steps of $2k)', () => {
+      expect(r(cdctcRate(89_000, 'single'))).toBe(0.28);
+    });
+    it('single $105,001 → 20% floor', () => {
+      expect(r(cdctcRate(105_001, 'single'))).toBe(0.20);
+    });
+    it('MFJ $150,001 → 34%', () => {
+      expect(r(cdctcRate(150_001, 'mfj'))).toBe(0.34);
+    });
+    it('MFJ $178,000 → 28% (7 steps of $4k)', () => {
+      expect(r(cdctcRate(178_000, 'mfj'))).toBe(0.28);
+    });
+    it('MFJ $210,001 → 20% floor', () => {
+      expect(r(cdctcRate(210_001, 'mfj'))).toBe(0.20);
+    });
   });
 
-  it('drops to 35% above the maximum-rate threshold (MFJ)', () => {
-    expect(cdctcRate(30_001, 'mfj')).toBe(0.35);
-    expect(cdctcRate(100_000, 'mfj')).toBe(0.35);
-    expect(cdctcRate(150_000, 'mfj')).toBe(0.35);
+  describe('Phase 3 (20% floor)', () => {
+    it('single high AGI stays at 20%', () => {
+      expect(cdctcRate(150_000, 'single')).toBe(0.20);
+      expect(cdctcRate(250_000, 'single')).toBe(0.20);
+      expect(cdctcRate(1_000_000, 'single')).toBe(0.20);
+    });
+    it('MFJ high AGI stays at 20%', () => {
+      expect(cdctcRate(300_000, 'mfj')).toBe(0.20);
+      expect(cdctcRate(500_000, 'mfj')).toBe(0.20);
+    });
   });
 
-  it('phases down between flat and floor thresholds (single)', () => {
-    // At $89,000 (midpoint of $75k–$103k), rate should be ~27.5% (mid of 35% → 20%).
-    const r = cdctcRate(89_000, 'single');
-    expect(r).toBeGreaterThan(0.20);
-    expect(r).toBeLessThan(0.35);
-    expect(r).toBeCloseTo(0.275, 2);
-  });
-
-  it('phases down between flat and floor thresholds (MFJ)', () => {
-    const r = cdctcRate(178_000, 'mfj');
-    expect(r).toBeCloseTo(0.275, 2);
-  });
-
-  it('hits 20% floor above the floor threshold (single)', () => {
-    expect(cdctcRate(103_000, 'single')).toBe(0.20);
-    expect(cdctcRate(250_000, 'single')).toBe(0.20);
-    expect(cdctcRate(1_000_000, 'single')).toBe(0.20);
-  });
-
-  it('hits 20% floor above the floor threshold (MFJ)', () => {
-    expect(cdctcRate(206_000, 'mfj')).toBe(0.20);
-    expect(cdctcRate(500_000, 'mfj')).toBe(0.20);
-  });
-
-  it('MFS uses single thresholds', () => {
-    expect(cdctcRate(10_000, 'mfs')).toBe(0.50);
-    expect(cdctcRate(50_000, 'mfs')).toBe(0.35);
-    expect(cdctcRate(200_000, 'mfs')).toBe(0.20);
+  describe('MFS uses single thresholds', () => {
+    it('low AGI: 50%', () => {
+      expect(cdctcRate(10_000, 'mfs')).toBe(0.50);
+    });
+    it('phase 1 step works the same as single', () => {
+      expect(r(cdctcRate(15_001, 'mfs'))).toBe(0.49);
+      expect(r(cdctcRate(43_001, 'mfs'))).toBe(0.35);
+    });
+    it('phase 2 step works the same as single', () => {
+      expect(r(cdctcRate(75_001, 'mfs'))).toBe(0.34);
+      expect(r(cdctcRate(105_001, 'mfs'))).toBe(0.20);
+    });
+    it('high AGI: 20% floor', () => {
+      expect(cdctcRate(200_000, 'mfs')).toBe(0.20);
+    });
   });
 });
 

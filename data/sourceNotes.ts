@@ -1,8 +1,22 @@
-// Source notes — every assumption block in the calculator should map to one of
-// these. The list is loaded from public/data/source_registry.csv (the single
-// source of truth, editable in Sheets). Each data CSV references an entry
-// here via its `source_id` column; the validate-csv script checks that every
-// reference resolves.
+// Source notes — registry of public sources cited across the site.
+//
+// Loaded from public/data/source_registry.csv (the single source of truth,
+// editable in Sheets). Two patterns reference this registry:
+//
+//   1. Per-CSV (file-level) provenance via public/data/data_manifest.csv —
+//      used for tables where every row shares one source (e.g. all 51 state
+//      childcare rows come from CCAOA's price-landscape report; all 20 gear
+//      rows come from the retail snapshot). Adding a redundant `source_id`
+//      column to those CSVs would be 51× the same value with no benefit.
+//
+//   2. Per-row provenance via a `source_id` column in the CSV itself — used
+//      where rows are heterogeneous (birth_oop_ranges.csv has employer rows
+//      sourced from KFF and marketplace rows from CMS, so the column is
+//      necessary).
+//
+// The validate-csv script (`npm run validate-data`) checks that every
+// referenced source_id — whether from the manifest or a row column —
+// resolves to a row here.
 
 import { parseCsv } from '@/lib/csv';
 import sourceRegistryCsv from '@/public/data/source_registry.csv';

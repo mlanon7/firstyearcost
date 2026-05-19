@@ -151,7 +151,9 @@ export default function Page() {
           </div>
         </div>
         <p className="mt-3 text-xs text-ink-500">
-          Numbers are planning ranges, not bills. Anchored to Peterson-KFF Health System Tracker employer-plan averages for vaginal and cesarean delivery and the 2026 ACA marketplace cost-sharing limits published by CMS. Marketplace and uninsured rows are directional — local hospital pricing varies widely. Last reviewed 2026-05-18.
+          Numbers are planning ranges, not bills. Anchored to Peterson-KFF Health System Tracker employer-plan averages for vaginal and cesarean delivery, and the 2026 ACA cost-sharing limits set by the{' '}
+          <a href="https://www.federalregister.gov/documents/2025/06/25/2025-11606/patient-protection-and-affordable-care-act-marketplace-integrity-and-affordability" target="_blank" rel="noopener" className="underline">HHS/CMS Marketplace Integrity and Affordability Final Rule</a>
+          {' '}(Federal Register 2025-11606, published June 25 2025) — which revised the original 2026 NBPP limits of $10,150/$20,300 upward to $10,600/$21,200. Marketplace and uninsured rows are directional; local hospital pricing varies widely. Last reviewed 2026-05-18.
         </p>
       </section>
 

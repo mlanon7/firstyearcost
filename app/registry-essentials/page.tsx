@@ -33,7 +33,7 @@ const faq: FAQItem[] = [
   },
   {
     q: 'What absolutely must be bought new?',
-    a: 'Car seats (older than the expiration date or that have been in a crash are unsafe), crib mattresses (used mattresses are linked to higher SIDS risk per AAP studies), and bottle nipples (rubber breaks down). Cribs themselves must meet 2011+ CPSC standards; if you can verify that, secondhand is fine. Anything with motors, batteries, or fabric in contact with the baby that you can\'t verify is usually best bought new.',
+    a: 'Car seats (older than the manufacturer expiration date or that have been in a crash are unsafe). Crib mattresses — the AAP recommends a firm, flat, tight-fitting sleep surface with no wear, mold, or damage; buy new unless you can verify a used mattress meets all of those criteria. Bottle nipples (rubber breaks down). Cribs themselves must meet 2011+ CPSC standards; if you can verify that, secondhand is fine. Anything with motors, batteries, or fabric in contact with the baby that you can\'t verify is usually best bought new.',
   },
   {
     q: 'What can safely be secondhand?',

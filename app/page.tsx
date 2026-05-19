@@ -107,7 +107,7 @@ export default function HomePage() {
             <FeatureCard
               icon={<FileText className="w-5 h-5" />}
               title="Sources you can audit"
-              body="Every assumption block links to its source — CDC, KFF, Child Care Aware, retail snapshots — with a last-reviewed date. No black-box numbers."
+              body="Key assumption categories trace to public sources — CDC, KFF/Peterson-KFF, Child Care Aware, IRS, CMS, AAP — plus documented retail snapshots. Every data table is downloadable as CSV with a last-reviewed date."
               accent="ink"
             />
           </div>
@@ -128,72 +128,84 @@ export default function HomePage() {
               icon={<Calculator className="w-5 h-5" />}
               title="Childcare cost calculator"
               body="Compare center, home daycare, nanny, nanny share, part-time, or family help — by state, by hours per week."
+              cta="Estimate childcare"
             />
             <CalcLink
               href="/diaper-calculator"
               icon={<Calculator className="w-5 h-5" />}
               title="Diaper & wipes calculator"
               body="Disposable vs. cloth, brand tier, bulk-buy effect. ~2,500–3,000 diapers in year one, modeled month-by-month."
+              cta="Compare diaper costs"
             />
             <CalcLink
               href="/formula-vs-breastfeeding-calculator"
               icon={<Calculator className="w-5 h-5" />}
               title="Feeding cost calculator"
               body="Formula vs. breastfeeding vs. combo. Includes pump, bottles, lactation support, and specialty formula tiers."
+              cta="Plan feeding costs"
             />
             <CalcLink
               href="/baby-gear-budget"
               icon={<Calculator className="w-5 h-5" />}
               title="Baby gear budget planner"
               body="Crib to car seat to monitor — by tier, with registry coverage and a 'must-have before birth' checklist."
+              cta="Build gear budget"
             />
             <CalcLink
               href="/birth-insurance-planner"
               icon={<Calculator className="w-5 h-5" />}
               title="Birth & insurance planner"
               body="Out-of-pocket planning ranges by insurance type and delivery type, plus questions to ask your insurer."
+              cta="Estimate birth costs"
             />
             <CalcLink
               href="/state-childcare-costs"
               icon={<Calculator className="w-5 h-5" />}
               title="Childcare costs by state"
               body="Browse infant center, home daycare, and nanny ranges in all 50 states + DC."
+              cta="Browse states"
             />
             <CalcLink
               href="/daycare-vs-nanny-cost"
               icon={<Calculator className="w-5 h-5" />}
               title="Daycare vs. nanny: cost compared"
               body="Side-by-side cost, hours, sick-day flexibility, and the break-even for nanny share."
+              cta="See the comparison"
             />
             <CalcLink
               href="/childcare-subsidy-calculator"
               icon={<Calculator className="w-5 h-5" />}
               title="Childcare tax credit & FSA estimator"
               body="Estimate the federal CDCTC + dependent-care FSA savings on your annual childcare bill — 2026 rules."
+              cta="Estimate tax savings"
             />
             <CalcLink
               href="/c-section-vs-vaginal-cost"
               icon={<Calculator className="w-5 h-5" />}
               title="C-section vs. vaginal birth cost"
               body="Billed totals and out-of-pocket ranges by delivery type and insurance — plus the questions to ask your insurer."
+              cta="Compare delivery costs"
             />
             <CalcLink
               href="/maternity-leave-by-state"
               icon={<Calculator className="w-5 h-5" />}
               title="Paid leave by state"
               body="Which states pay parental leave in 2026 — weeks, wage replacement, and benefit caps for every state."
+              cta="Find your state"
             />
             <CalcLink
               href="/registry-essentials"
               icon={<Calculator className="w-5 h-5" />}
               title="Registry essentials checklist"
               body="Must-have-before-birth, safety-buy-new, and can-wait — sorted with real cost ranges."
+              cta="See the checklist"
             />
             <CalcLink
               href="/second-baby-cost"
               icon={<Calculator className="w-5 h-5" />}
               title="Second baby cost"
               body="What changes — and what doesn't — when you add a second baby. Gear, childcare, tax credits."
+              cta="Plan baby #2"
             />
           </div>
         </div>
@@ -282,7 +294,7 @@ export default function HomePage() {
                 Pick a preset, tweak the inputs, and get a planning estimate in under a minute.
               </p>
               <Link href="#calculator" className="btn btn-accent mt-6 inline-flex">
-                Open the calculator <ArrowRight className="w-4 h-4" />
+                Start my baby budget <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -309,14 +321,16 @@ function FeatureCard({
   );
 }
 
-function CalcLink({ href, icon, title, body }: { href: string; icon: React.ReactNode; title: string; body: string }) {
+function CalcLink({
+  href, icon, title, body, cta = 'Open',
+}: { href: string; icon: React.ReactNode; title: string; body: string; cta?: string }) {
   return (
     <Link href={href} className="card p-6 block hover:shadow-pop hover:-translate-y-0.5 transition group">
       <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-teal-50 text-teal-700 group-hover:bg-teal-500 group-hover:text-white transition">{icon}</div>
       <h3 className="mt-4 h4 text-ink-900">{title}</h3>
       <p className="mt-2 text-sm text-ink-600 leading-relaxed">{body}</p>
       <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-teal-700 group-hover:gap-2 transition-all">
-        Open <ArrowRight className="w-4 h-4" />
+        {cta} <ArrowRight className="w-4 h-4" />
       </span>
     </Link>
   );

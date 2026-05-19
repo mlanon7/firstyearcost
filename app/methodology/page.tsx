@@ -54,8 +54,11 @@ export default function Page() {
             <p className="pill pill-teal mb-3">How we build estimates</p>
             <h1 className="h1 text-ink-900">Methodology & sources</h1>
             <p className="lede mt-4">
-              No black-box numbers. Every assumption block traces back to a public data source,
-              with a last-reviewed date and a note when our adjustments differ from the original.
+              Each data table on this site is backed by a named source, last-reviewed
+              date, and adjustment notes — and every CSV is downloadable below. Provenance
+              is recorded at the category level (one source per table) for tables where
+              all rows share a single underlying study, and at the row level for tables
+              where rows come from different sources.
             </p>
           </div>
         </div>
