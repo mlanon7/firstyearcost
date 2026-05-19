@@ -142,18 +142,27 @@ it (month 2–3).
 
 ### 3.2 Affiliate programs — apply now, even if approval lags
 
+Rates below are verified as of 2026-05-19 from each program's published
+materials.
+
 | Program | What to monetize | Apply at | Realistic rate |
 |---|---|---|---|
-| Babylist | Registry, gear pages | https://www.babylist.com/help/affiliate-program | 5–8% |
-| Amazon Associates | Diapers, formula, gear | https://affiliate-program.amazon.com | 1–4% baby |
-| Skimlinks | Auto-affiliates any retailer | https://skimlinks.com | varies, 70% of base |
-| Ethos Life | Life insurance for new parents | https://www.ethoslife.com/partners | $40–150 / qualified lead |
-| Fabric (Gerber Life) | Life insurance + 529s | apply via Impact.com | $30–80 / signup |
-| UNest | 529 / baby investment | https://unest.co | $5–25 / signup |
-| Taking Cara Babies | Sleep course | direct partner contact | 10–20% |
+| **Babylist** (Impact) | Registry essentials, gear | https://www.babylist.com/help/affiliate-program | **$1–$4 per registry signup**, 0.8–2% baseline, up to 6.4% on house brands |
+| **Amazon Associates** | Diapers, formula, gear | https://affiliate-program.amazon.com | **3% baby products** + **$5 per new baby-registry creation** bounty |
+| **Bobbie formula** (direct) | Feeding page, formula type chip | https://www.hibobbie.com/pages/affiliates | **15% per sale** — one of the highest in baby CPG |
+| **Lovevery** (ShareASale) | Gear, registry, toys | ShareASale → Lovevery | 10%, 14-day cookie |
+| **Kindred Bravely** (ShareASale) | Feeding page (nursing apparel) | ShareASale → Kindred Bravely | ~8–12% typical apparel rate |
+| **Fabric (Gerber Life)** | Life insurance for new parents — birth + c-section + second-baby pages | Impact / FlexOffers / ShareASale | **$80–$100 / sale**, up to 64% of premium |
+| **Ethos Life** (Impact) | Life insurance | https://www.ethos.com/affiliate-program/ | $20–$55 / lead |
+| **Bestow** | Life insurance — explicitly targets new parents | Impact / FlexOffers | up to $40 / lead |
+| **Acorns Early** | 529 / baby investing — pairs with future Trump Account calc | https://www.acorns.com/early-affiliate/ | bounty per signup |
+| **Taking Cara Babies** | Sleep course | direct partner contact | 10–20% |
+| **Skimlinks** (catch-all) | Auto-affiliates any retailer | https://skimlinks.com | ~70% of underlying rate; no per-merchant approval needed |
 
-**Don't add affiliate links until approval.** Skimlinks is the exception —
-auto-routes affiliate-capable links, no per-merchant approval needed.
+**Don't add affiliate links until approval** (except Skimlinks — auto-routes).
+Insurance lead-gen is the highest-leverage line: one Fabric conversion ≈
+100,000 Amazon baby-product clicks at 3%. Place on `/birth-insurance-planner`,
+`/c-section-vs-vaginal-cost`, and `/second-baby-cost`.
 
 ### 3.3 Wire affiliate links
 - Use `<AffiliateLink>` component (already built). Sets `rel="sponsored noopener nofollow"`, fires `affiliate_click` analytics event.
@@ -198,22 +207,41 @@ Target list (start here):
   pages where the data is locally relevant; flair as a creator if you stay long-term
 
 ### 4.2 Content cadence — what to write next
-Ordered by SEO ROI:
-1. **Per-state birth out-of-pocket pages** — `/birth-cost/[state]` (50 pages). Use Medicaid eligibility data + state hospital benchmark from CMS Hospital Compare.
-2. **Twins / multiples calculator** — high search volume, low competition.
-3. **NICU cost & insurance guide** — top-of-funnel for life insurance affiliate.
-4. **Per-metro childcare pages** for the 50 priciest metros — drop in next CSV.
-5. **Glossary** (deductible, OOP max, coinsurance, copay, FSA, HSA, dependent care) — these terms appear in calc inputs; users Google them.
+Ordered by SEO ROI (updated 2026-05-19 after competitor SERP review). Two
+near-empty SERPs the site is uniquely positioned to capture right now:
+
+**Highest priority — competitor SERPs are weak (60-90 day window):**
+1. **Trump Accounts calculator** — `/trump-account-calculator`. Launches July 5, 2026 with $1,000 federal seed per baby born 2025-2028, $5,000 annual cap. Babylist has explainer content; nobody has a calculator. Compare Trump Account vs 529 vs UTMA over 0-18 years. Natural pair with Acorns Early / Fabric affiliate paths.
+2. **DCFSA vs CDCTC comparison (2026)** — `/dcfsa-vs-cdctc-comparison`. OBBBA raised both ($7,500 FSA cap, 50% CDCTC max). No parenting calc has updated. SubsidyCalculator math is correct; need a focused comparison page that ranks for "should I use FSA or tax credit for daycare 2026".
+
+**High SEO ROI:**
+3. **Per-state birth out-of-pocket pages** — `/birth-cost/[state]` (50 pages). Use Medicaid eligibility data + state hospital benchmark from CMS Hospital Compare.
+4. **Twins / multiples calculator** — high search volume, low competition.
+5. **NICU cost & insurance guide** — top-of-funnel for life insurance affiliate; high-anxiety query, current SERP weak.
+6. **Maternity-leave income replacement calculator** — paired with the state PFML data already in `state_leave.csv` (now with tiered wage-replacement columns). No competitor aggregates this cross-state.
+7. **Per-metro childcare pages** for the 50 priciest metros.
+8. **Glossary** (deductible, OOP max, coinsurance, copay, FSA, HSA, dependent care) — these terms appear in calc inputs.
+
+**Backlink magnets:**
+9. **Embeddable widget routes** — `/embed/childcare?state=ca` etc. ParentCalc and DaycareCalc seed referral links by giving away free iframe widgets. The CSV-source-of-truth design makes this 2-3 days of work.
+10. **Childcare subsidy eligibility checker by state** — CCDF income thresholds vary; nobody surfaces them live.
 
 ### 4.3 Monetization checkpoints
 
+**Updated 2026-05-19:** Mediavine restructured in January 2026 — its new
+"Journey" tier accepts sites at **1,000 monthly sessions** (down from 50K).
+This is a major shift: instead of running AdSense alone for the first year,
+you can be on a premium ad network 60–90 days after launch.
+
 | Monthly sessions | Move |
 |---|---|
-| 0–2,000 | AdSense live; Amazon + Skimlinks; track affiliate CTR |
-| 2,000–10,000 | Apply to direct DTC affiliate programs (Bobbie, Coterie, Owlet, Lovevery) |
-| 10,000–50,000 | Apply to Ezoic or Sortable to lift display RPM; A/B test ad layouts |
-| 50,000+ | Apply to **Mediavine** (highest-RPM mid-market network in family niche) |
-| 100,000+ | Apply to **Raptive** (the former AdThrive — premium tier, $25–50 RPM typical) |
+| 0–1,000 | AdSense live; Amazon + Skimlinks; track affiliate CTR; apply for direct DTC programs (Bobbie 15%, Lovevery, Babylist) |
+| **1,000+** | **Apply to Mediavine "Journey" tier** — replaces AdSense as primary display monetization. Family/lifestyle blended RPM typically $25–$45. |
+| 5,000+ on `/c-section-vs-vaginal-cost` or `/birth-insurance-planner` | Apply to **Fabric (Gerber Life)** — $80–$100/sale. Single highest-CPA channel in this niche. |
+| 50,000+ | Move to Mediavine "Official" tier ($5K+ annual ad rev qualifier); apply to Raptive |
+| 100,000+ | Premium-tier ad networks; consider direct sponsorships |
+
+Sources: [Mediavine 2026 tier overview](https://earnifyhub.com/blog/blogging/how-to-get-into-mediavine-2026).
 
 ### 4.4 Insurance lead-gen — the highest-leverage Year-2 play
 The `/c-section-vs-vaginal-cost` and `/birth-insurance-planner` pages are

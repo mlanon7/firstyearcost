@@ -189,13 +189,18 @@ for (let i = 0; i < registry.length; i++) {
 }
 
 // ---------------------------------------------------------------------------
-// state_leave row-level source_url checks
+// state_leave row-level source_url + source_id checks
 // ---------------------------------------------------------------------------
 const stateLeave = readCsv('state_leave.csv');
 for (let i = 0; i < stateLeave.length; i++) {
   const r = stateLeave[i];
   if (!r.source_url || !/^https?:\/\//.test(r.source_url)) {
     err(`state_leave.csv:${i + 2} (${r.state_code}) malformed source_url "${r.source_url}"`);
+  }
+  if (!r.source_id) {
+    err(`state_leave.csv:${i + 2} (${r.state_code}) missing source_id`);
+  } else if (!sourceIds.has(r.source_id)) {
+    err(`state_leave.csv:${i + 2} (${r.state_code}) references unknown source_id "${r.source_id}"`);
   }
 }
 

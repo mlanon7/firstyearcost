@@ -7,7 +7,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
 import { ChildcareCalculator } from '@/components/ChildcareCalculator';
-import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 export async function generateStaticParams() {
   return stateChildcare.map((s) => ({ state: slugifyState(s.name) }));
@@ -62,6 +62,13 @@ export default function Page({ params }: { params: { state: string } }) {
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Childcare costs by state', url: 'https://firstyearcost.com/state-childcare-costs' },
+          { name: s.name, url: `https://firstyearcost.com/state-childcare-costs/${slugifyState(s.name)}` },
+        ]}
+      />
+      <VisibleBreadcrumbs
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Childcare by state', url: 'https://firstyearcost.com/state-childcare-costs' },
           { name: s.name, url: `https://firstyearcost.com/state-childcare-costs/${slugifyState(s.name)}` },
         ]}
       />

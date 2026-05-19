@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <article className="container-pg py-12 max-w-3xl prose-custom">
       <h1 className="h1 text-ink-900 mb-4">Privacy Policy</h1>
-      <p className="text-sm text-ink-500 mb-8">Last updated: 2026-04-30</p>
+      <p className="text-sm text-ink-500 mb-8">Last updated: 2026-05-19</p>
 
       <p>
         FirstYearCost.com ("we," "us," "our") respects your privacy. This page explains what data we
@@ -26,12 +26,24 @@ export default function Page() {
 
       <h2>What we collect</h2>
       <p>
-        We collect very little. There is no account, no email signup, and no contact form on this site.
+        We collect very little. There is no account required to use any calculator, and no contact form.
         Calculator inputs are processed entirely in your browser and are not sent to our servers.
       </p>
       <p>
         We may collect aggregated, non-identifying analytics — like which pages are most visited and which
         calculators are used — to improve the site. We do not link this data to your identity.
+      </p>
+
+      <h2>Optional email signup (newsletter / workbook)</h2>
+      <p>
+        If you choose to submit your email address through the optional "budget workbook" form, we store
+        it with our newsletter provider for the sole purpose of (a) emailing you the workbook download
+        and (b) sending occasional updates when we revise our cost data. Every email contains a one-click
+        unsubscribe link. We do not sell, rent, share, or trade your email address with anyone.
+      </p>
+      <p>
+        When wired, we use a third-party newsletter provider (such as ConvertKit, Buttondown, or Beehiiv).
+        Each provider has its own privacy policy linked from the signup form.
       </p>
 
       <h2>Cookies</h2>
@@ -65,7 +77,8 @@ export default function Page() {
 
       <h2>Data we don't collect</h2>
       <ul>
-        <li>We don't collect personally identifiable information (name, email, address) unless you choose to email us.</li>
+        <li>We don't collect personally identifiable information (name, address, phone) at all.</li>
+        <li>The only personal data we collect is the email address you voluntarily submit through the optional newsletter / workbook form — see above.</li>
         <li>We don't sell, rent, or trade your data.</li>
         <li>We don't store calculator inputs on our servers.</li>
         <li>We don't use behavioral profiling to determine the calculator's outputs.</li>

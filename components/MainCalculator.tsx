@@ -359,17 +359,12 @@ export function MainCalculator() {
                 />
               </div>
             </div>
-            <div>
-              <label className="label">Unpaid parental leave (months)</label>
-              <Slider
-                min={0}
-                max={12}
-                value={inputs.parentalLeaveUnpaidMonths}
-                onChange={(v) => setField('parentalLeaveUnpaidMonths', v)}
-                suffix="mo"
-              />
-              <p className="help">For your awareness — not added to the baby cost total.</p>
-            </div>
+            {/* Unpaid parental leave was previously a slider here but did
+                not affect any numeric output — only added a note to the
+                results. Removed per the audit "every visible input must
+                affect the result" principle. Paid-leave income replacement
+                lives on /maternity-leave-by-state and a future lost-income
+                calculator will pair with household income. */}
           </div>
         </div>
 

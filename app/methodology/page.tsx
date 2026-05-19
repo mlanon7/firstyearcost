@@ -140,7 +140,13 @@ export default function Page() {
             <li>It is <strong>not medical advice</strong>. We don't give feeding, formula, or pediatric guidance.</li>
             <li>It is <strong>not insurance advice</strong>. We can't tell you what your specific plan will pay.</li>
             <li>It is <strong>not a bill</strong>. It's a planning estimate using ranges, not a quote.</li>
-            <li>It is <strong>not financial advice</strong>. We don't account for your tax situation, FSAs, 529s, or income changes.</li>
+            <li>
+              It is <strong>not tax advice</strong>. We do provide a federal Child &amp; Dependent Care Tax
+              Credit + Dependent Care FSA planning estimator at{' '}
+              <a href="/childcare-subsidy-calculator">/childcare-subsidy-calculator</a> for 2026 rules,
+              but that estimator does not model state tax credits, the Saver's Credit, ACTC interactions,
+              or other deductions on your full return. Talk to a CPA for your actual filing.
+            </li>
             <li>It is <strong>not a registry</strong>. We don't recommend specific products for affiliate revenue.</li>
           </ul>
           <p>

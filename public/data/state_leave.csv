@@ -1,52 +1,52 @@
-state_code,state_name,program,paid_leave_weeks,wage_replacement_pct,max_weekly_benefit_usd,job_protection,notes,source_url
-AL,Alabama,None,0,0,0,FMLA only,No state paid family leave. Federal FMLA may apply (12 unpaid weeks).,https://www.dol.gov/agencies/whd/fmla
-AK,Alaska,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-AZ,Arizona,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-AR,Arkansas,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-CA,California,PFL + SDI,8,0.7,1681,CFRA + PDL,California PFL pays 70-90% of wages for 8 weeks of bonding leave. SDI covers pregnancy disability (typically 6-8 weeks for vaginal delivery / 8-10 for C-section).,https://edd.ca.gov/disability/paid-family-leave/
-CO,Colorado,FAMLI,12,0.9,1100,Yes,Colorado FAMLI launched 2024. Up to 12 weeks paid family leave + 4 weeks for pregnancy/childbirth complications. Wage replacement up to 90% of low-wage workers.,https://famli.colorado.gov
-CT,Connecticut,CT Paid Leave,12,0.95,941,Yes,12 weeks of paid family leave; 2 additional weeks for serious health condition during pregnancy.,https://ctpaidleave.org
-DE,Delaware,DE PFML,12,0.8,900,Yes,Delaware Paid Family and Medical Leave begins benefit payments January 2026.,https://labor.delaware.gov/divisions/paid-leave/
-DC,District of Columbia,DC Paid Family Leave,12,0.9,1153,Yes,12 weeks paid family leave for new parents.,https://dcpaidfamilyleave.dc.gov
-FL,Florida,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-GA,Georgia,None,0,0,0,FMLA only,No state paid family leave. State employees only have a limited program.,https://www.dol.gov/agencies/whd/fmla
-HI,Hawaii,TDI only,0,0.58,795,FMLA + HFLL,Hawaii has Temporary Disability Insurance (covers pregnancy/recovery) but no paid bonding leave yet.,https://labor.hawaii.gov/dcd/home/about-tdi/
-ID,Idaho,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-IL,Illinois,None,0,0,0,FMLA only,Illinois requires 5 paid sick days per year (2024+). Chicago has a paid leave ordinance.,https://www.dol.gov/agencies/whd/fmla
-IN,Indiana,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-IA,Iowa,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-KS,Kansas,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-KY,Kentucky,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-LA,Louisiana,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-ME,Maine,ME PFML,12,0.9,1144,Yes,Maine Paid Family and Medical Leave begins benefit payments May 2026.,https://www.maine.gov/labor/pfml/
-MD,Maryland,MD FAMLI,12,0.9,1000,Yes,Maryland Family and Medical Leave Insurance begins payments July 2026.,https://paidleave.maryland.gov
-MA,Massachusetts,MA PFML,12,0.8,1170,Yes,12 weeks paid family leave + up to 20 weeks medical leave (combined 26 max).,https://www.mass.gov/orgs/department-of-family-and-medical-leave
-MI,Michigan,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-MN,Minnesota,MN Paid Leave,12,0.9,1100,Yes,Minnesota Paid Leave benefit payments begin January 2026. Up to 20 weeks combined family + medical.,https://paidleave.mn.gov
-MS,Mississippi,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-MO,Missouri,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-MT,Montana,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-NE,Nebraska,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-NV,Nevada,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-NH,New Hampshire,Voluntary,0,0,0,FMLA only,Voluntary state program; opt-in coverage available through MetLife.,https://www.paidfamilymedicalleave.nh.gov
-NJ,New Jersey,NJ Family Leave Insurance,12,0.85,1095,NJ FLA,12 weeks of paid family leave at 85% of wages; separate Temporary Disability Insurance covers pregnancy recovery.,https://myleavebenefits.nj.gov
-NM,New Mexico,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-NY,New York,NY PFL,12,0.67,1177,Yes,12 weeks paid family leave at 67% of average weekly wage. Disability Benefits Law also covers pregnancy recovery.,https://paidfamilyleave.ny.gov
-NC,North Carolina,None,0,0,0,FMLA only,State employees have 8 weeks paid parental leave; no statewide private-sector program.,https://www.dol.gov/agencies/whd/fmla
-ND,North Dakota,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-OH,Ohio,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-OK,Oklahoma,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-OR,Oregon,Paid Leave Oregon,12,1.0,1568,Yes,Up to 12 weeks paid (14 with pregnancy complications). 100% wage replacement for low-wage workers.,https://paidleave.oregon.gov
-PA,Pennsylvania,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-RI,Rhode Island,RI TCI,7,0.6,1043,Yes,Temporary Caregiver Insurance: 7 weeks paid bonding leave. TDI covers pregnancy disability separately.,https://dlt.ri.gov/individuals/temporary-caregiver-insurance
-SC,South Carolina,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-SD,South Dakota,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-TN,Tennessee,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-TX,Texas,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-UT,Utah,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-VT,Vermont,Voluntary,0,0,0,FMLA only,Voluntary state PFL through The Hartford launched 2023; opt-in coverage.,https://tax.vermont.gov/business-and-corp/payroll-taxes/family-and-medical-leave
-VA,Virginia,None,0,0,0,FMLA only,No state paid family leave. State employees have 8 weeks paid parental leave.,https://www.dol.gov/agencies/whd/fmla
-WA,Washington,WA Paid Leave,12,0.9,1542,Yes,12 weeks of paid family leave (up to 16 combined with medical). Up to 18 weeks with pregnancy complications.,https://paidleave.wa.gov
-WV,West Virginia,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-WI,Wisconsin,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
-WY,Wyoming,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla
+state_code,state_name,program,paid_leave_weeks,wage_replacement_pct,max_weekly_benefit_usd,job_protection,notes,source_url,source_id,low_tier_pct,upper_tier_pct,low_tier_cap_pct
+AL,Alabama,None,0,0,0,FMLA only,No state paid family leave. Federal FMLA may apply (12 unpaid weeks).,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+AK,Alaska,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+AZ,Arizona,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+AR,Arkansas,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+CA,California,PFL + SDI,8,0.9,1765,CFRA + PDL,"California PFL pays a tiered 70%/90% under SB 951: 90% of weekly wages for lower earners (up to ~70% of SAWW), 70% above. Max $1,765/wk for 2026. SDI covers pregnancy disability (typically 6-8 weeks for vaginal / 8-10 for C-section).",https://edd.ca.gov/en/disability/Contribution_Rates_and_Benefit_Amounts/,state-pfml-ca,0.9,0.7,0.7
+CO,Colorado,FAMLI,12,0.9,1381,Yes,"Colorado FAMLI pays 90% of weekly wages up to 50% of state AWW, then 50% above. Max $1,381.45/wk for 2026. Up to 4 additional perinatal weeks for complications.",https://famli.colorado.gov/individuals-and-families/how-famli-works/premium-and-benefits-calculator,state-pfml-co,0.9,0.5,0.5
+CT,Connecticut,CT Paid Leave,12,0.95,1016,Yes,"CT Paid Leave pays 95% up to 40x minimum wage, 60% above. Max $1,016.40/wk for 2026. 2 additional weeks for serious health condition during pregnancy.",https://www.ctpaidleave.org/claims/before-you-apply,state-pfml-ct,0.95,0.6,0.5
+DE,Delaware,DE PFML,12,0.8,900,Yes,"Delaware PFML launched January 2026. Parental leave is up to 12 weeks at 80% wage replacement; medical / caregiver / qualifying-exigency leaves are capped at 6 weeks per 24-month period. Max $900/wk.",https://labor.delaware.gov/divisions/paid-leave/,state-pfml-de,0.8,0.8,1.0
+DC,District of Columbia,DC Paid Family Leave,12,0.9,1190,Yes,"DC Paid Family Leave: up to 12 weeks at 90% of wages. Max $1,190/wk (effective September 28, 2025).",https://dcpaidfamilyleave.dc.gov,state-pfml-dc,0.9,0.9,1.0
+FL,Florida,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+GA,Georgia,None,0,0,0,FMLA only,No state paid family leave. State employees only have a limited program.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+HI,Hawaii,TDI only,0,0.58,795,FMLA + HFLL,Hawaii has Temporary Disability Insurance (covers pregnancy/recovery) but no paid bonding leave yet.,https://labor.hawaii.gov/dcd/home/about-tdi/,state-pfml-hi,0.58,0.58,1.0
+ID,Idaho,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+IL,Illinois,None,0,0,0,FMLA only,Illinois requires 5 paid sick days per year (2024+). Chicago has a paid leave ordinance.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+IN,Indiana,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+IA,Iowa,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+KS,Kansas,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+KY,Kentucky,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+LA,Louisiana,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+ME,Maine,ME PFML,12,0.9,1199,Yes,"Maine Paid Family and Medical Leave begins benefit payments May 1, 2026. Tiered: 90% up to 50% of SAWW, 66% above. Max $1,198.84/wk through 6/30/26 (recalculates annually).",https://www.maine.gov/paidleave/,state-pfml-me,0.9,0.66,0.5
+MD,Maryland,FMLA only (PFML delayed),0,0,0,FMLA only,"Maryland Family and Medical Leave Insurance was scheduled for 2026 but the launch was delayed: contributions begin January 1, 2027 and benefit payments begin January 3, 2028. For 2026 only federal FMLA applies.",https://labor.maryland.gov/whatsnews/laborannouncestheextensionofthestartdateoffamlibenefits.shtml,state-pfml-md,0,0,0
+MA,Massachusetts,MA PFML,12,0.8,1230,Yes,"Massachusetts PFML: 12 weeks family / 20 weeks medical / 26 combined. Tiered 80% up to 50% of SAWW, 50% above. Max $1,230.39/wk for 2026.",https://www.mass.gov/info-details/how-pfml-weekly-benefit-amounts-are-calculated-andor-changed,state-pfml-ma,0.8,0.5,0.5
+MI,Michigan,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+MN,Minnesota,MN Paid Leave,12,0.9,1423,Yes,"Minnesota Paid Leave launched January 1, 2026. Up to 12 weeks family / 12 weeks medical / 20 combined. Tiered replacement; max $1,423/wk for 2026.",https://pl.mn.gov/individuals/how-paid-leave-works,state-pfml-mn,0.9,0.55,0.5
+MS,Mississippi,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+MO,Missouri,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+MT,Montana,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+NE,Nebraska,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+NV,Nevada,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+NH,New Hampshire,Voluntary,0,0,0,FMLA only,Voluntary state program; opt-in coverage available through MetLife.,https://www.paidfamilymedicalleave.nh.gov,state-pfml-nh,0,0,0
+NJ,New Jersey,NJ Family Leave Insurance,12,0.85,1119,NJ FLA,"12 weeks of paid family leave at 85% of wages, max $1,119/wk for 2026. Separate Temporary Disability Insurance covers pregnancy recovery.",https://www.nj.gov/labor/lwdhome/press/2025/20251229_newbenefitrates2026.shtml,state-pfml-nj,0.85,0.85,1.0
+NM,New Mexico,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+NY,New York,NY PFL,12,0.67,1229,Yes,"12 weeks paid family leave at 67% of average weekly wage, max $1,228.53/wk for 2026. NY Disability Benefits Law also covers pregnancy recovery.",https://paidfamilyleave.ny.gov/2026,state-pfml-ny,0.67,0.67,1.0
+NC,North Carolina,None,0,0,0,FMLA only,State employees have 8 weeks paid parental leave; no statewide private-sector program.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+ND,North Dakota,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+OH,Ohio,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+OK,Oklahoma,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+OR,Oregon,Paid Leave Oregon,12,1.0,1637,Yes,"Up to 12 weeks paid (14 with pregnancy complications). Tiered 100% up to 65% of SAWW, then 50% above. Max $1,636.56/wk through July 5, 2026.",https://paidleave.oregon.gov,state-pfml-or,1.0,0.5,0.65
+PA,Pennsylvania,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+RI,Rhode Island,RI TCI,8,0.6,1103,Yes,"Temporary Caregiver Insurance: 8 weeks paid bonding leave (up from 7 effective January 1, 2026). Max $1,103/wk for 2026. TDI covers pregnancy disability separately.",https://dlt.ri.gov/individuals/temporary-disability-caregiver-insurance/claimants/tditci-frequently-asked-questions,state-pfml-ri,0.6,0.6,1.0
+SC,South Carolina,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+SD,South Dakota,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+TN,Tennessee,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+TX,Texas,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+UT,Utah,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+VT,Vermont,Voluntary,0,0,0,FMLA only,Voluntary state PFL through The Hartford launched 2023; opt-in coverage.,https://tax.vermont.gov/business-and-corp/payroll-taxes/family-and-medical-leave,state-pfml-vt,0,0,0
+VA,Virginia,None,0,0,0,FMLA only,No state paid family leave. State employees have 8 weeks paid parental leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+WA,Washington,WA Paid Leave,12,0.9,1647,Yes,"Washington: up to 12 weeks family / 12 weeks medical / 16 combined (plus 2 perinatal). Tiered 90% up to 50% of SAWW, 50% above. Max $1,647/wk for 2026.",https://paidleave.wa.gov/updates/,state-pfml-wa,0.9,0.5,0.5
+WV,West Virginia,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+WI,Wisconsin,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0
+WY,Wyoming,None,0,0,0,FMLA only,No state paid family leave.,https://www.dol.gov/agencies/whd/fmla,dol-fmla,0,0,0

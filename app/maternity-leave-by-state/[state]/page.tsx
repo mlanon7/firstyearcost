@@ -8,7 +8,7 @@ import { formatUSD } from '@/lib/format';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
-import { BreadcrumbsJsonLd, ArticleJsonLd } from '@/components/Breadcrumbs';
+import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 
 type Params = { state: string };
 
@@ -48,6 +48,13 @@ export default function Page({ params }: { params: Params }) {
         items={[
           { name: 'Home', url: 'https://firstyearcost.com/' },
           { name: 'Maternity leave by state', url: 'https://firstyearcost.com/maternity-leave-by-state' },
+          { name: s.name, url: URL },
+        ]}
+      />
+      <VisibleBreadcrumbs
+        items={[
+          { name: 'Home', url: 'https://firstyearcost.com/' },
+          { name: 'Paid leave by state', url: 'https://firstyearcost.com/maternity-leave-by-state' },
           { name: s.name, url: URL },
         ]}
       />

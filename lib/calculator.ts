@@ -448,5 +448,7 @@ export const defaultInputs: CalculatorInputs = {
   registryHelp: 'medium',
   insurance: 'employer',
   delivery: 'unknown',
-  parentalLeaveUnpaidMonths: 2,
+  // `parentalLeaveUnpaidMonths` removed from the UI in 2026-05-19 audit pass.
+  // Field retained on the type for back-compat with presets; default 0.
+  parentalLeaveUnpaidMonths: 0,
 };

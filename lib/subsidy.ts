@@ -61,16 +61,49 @@ export function fsaCap(filing: Filing): number {
   return filing === 'mfs' ? 3750 : 7500;
 }
 
-/** Quick marginal federal income tax bracket estimate. */
+/**
+ * 2026 federal marginal income tax bracket estimate.
+ *
+ * Source: IRS Revenue Procedure 2025-32 (issued October 9, 2025), as
+ * adjusted by the One Big Beautiful Bill Act. The 35% MFJ threshold is
+ * NOT simply 2× single — it's $768,700, not 2 × $640,600. Use explicit
+ * arrays per filing status.
+ *
+ * HOH thresholds match single in this proxy because they only differ in
+ * the lowest brackets and the deviation has negligible effect on FSA
+ * savings estimates at typical AGIs. MFS uses single thresholds (per IRC).
+ *
+ * This proxy is approximate by design — it uses AGI in place of taxable
+ * income (the actual statutory base). For FSA-savings estimation that is
+ * fine; for a real tax calculation a CPA / Form 1040 is required.
+ */
+const BRACKETS_SINGLE: { top: number; rate: number }[] = [
+  { top:  12_400, rate: 0.10 },
+  { top:  50_400, rate: 0.12 },
+  { top: 105_700, rate: 0.22 },
+  { top: 201_775, rate: 0.24 },
+  { top: 256_225, rate: 0.32 },
+  { top: 640_600, rate: 0.35 },
+  { top: Infinity, rate: 0.37 },
+];
+
+const BRACKETS_MFJ: { top: number; rate: number }[] = [
+  { top:  24_800, rate: 0.10 },
+  { top: 100_800, rate: 0.12 },
+  { top: 211_400, rate: 0.22 },
+  { top: 403_550, rate: 0.24 },
+  { top: 512_450, rate: 0.32 },
+  { top: 768_700, rate: 0.35 },
+  { top: Infinity, rate: 0.37 },
+];
+
 export function marginalBracketProxy(agi: number, filing: Filing): number {
-  const t = filing === 'mfj' ? 2 : 1;
-  if (agi <= 11_925 * t) return 0.10;
-  if (agi <= 48_475 * t) return 0.12;
-  if (agi <= 103_350 * t) return 0.22;
-  if (agi <= 197_300 * t) return 0.24;
-  if (agi <= 250_525 * t) return 0.32;
-  if (agi <= 626_350 * t) return 0.35;
-  return 0.37;
+  // HOH and MFS use the single-filer bracket structure in this approximation.
+  const brackets = filing === 'mfj' ? BRACKETS_MFJ : BRACKETS_SINGLE;
+  for (const b of brackets) {
+    if (agi <= b.top) return b.rate;
+  }
+  return 0.37; // unreachable; satisfies TS
 }
 
 export type SubsidyInputs = {

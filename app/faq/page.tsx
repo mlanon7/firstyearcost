@@ -38,7 +38,7 @@ const faq: FAQItem[] = [
   },
   {
     q: 'Do you sell my data?',
-    a: "No. We don't collect personal data through the calculators — there's no signup, no contact form, and no inputs are sent to any server. All calculations happen in your browser. We use lightweight analytics (page views) and may serve ads in the future, both of which we disclose in our privacy policy.",
+    a: "No. The calculators themselves require no signup — all calculations happen in your browser and no inputs are sent to any server. If you choose to submit your email address through the optional 'budget workbook' form, we store it only to email you the workbook and occasional data updates; every email has a one-click unsubscribe. We never sell, rent, or trade your data. We use lightweight analytics (page views) and may serve ads, both of which are disclosed in our privacy policy.",
   },
   {
     q: 'How do you make money?',
