@@ -60,10 +60,10 @@ export default function Page() {
               Paid maternity & paternity leave — every state, 2026
             </h1>
             <p className="lede mt-4">
-              Thirteen states plus DC now run a paid family-leave program. Most
-              of the country still has only the unpaid federal FMLA. Here's the
-              practical state-by-state breakdown — weeks, wage replacement,
-              weekly benefit caps, and the official program page.
+              Thirteen jurisdictions, including DC, now run a paid family-leave
+              program. Most of the country still has only the unpaid federal
+              FMLA. Here's the practical state-by-state breakdown — weeks, wage
+              replacement, weekly benefit caps, and the official program page.
             </p>
           </div>
         </div>

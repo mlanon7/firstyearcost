@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { sourceNotes } from '@/data/sourceNotes';
+import { sourceNotes, getSource } from '@/data/sourceNotes';
+import { dataManifest } from '@/data/manifest';
 import { SectionHeader } from '@/components/SectionHeader';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd, DatasetJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
@@ -137,6 +138,68 @@ export default function Page() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="container-pg pb-12 max-w-3xl">
+        <SectionHeader
+          title="Download the data"
+          subtitle="Every numeric assumption on this site lives in a plain CSV you can download, inspect, and quote. Each table lists its source, last-reviewed date, and review cadence."
+        />
+        <div className="mt-6 card overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-ink-50 text-ink-600 text-xs uppercase tracking-wider">
+                <tr>
+                  <th className="text-left font-semibold px-4 py-3">Data table</th>
+                  <th className="text-left font-semibold px-4 py-3 hidden md:table-cell">Source</th>
+                  <th className="text-left font-semibold px-4 py-3 hidden sm:table-cell">Reviewed</th>
+                  <th className="text-right font-semibold px-4 py-3">Download</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-ink-100">
+                {dataManifest
+                  .filter((m) => m.csvFile !== 'data_manifest.csv' && m.csvFile !== 'source_registry.csv')
+                  .map((m) => {
+                    const src = m.sourceId ? getSource(m.sourceId) : undefined;
+                    return (
+                      <tr key={m.csvFile} className="hover:bg-ink-50/40 align-top">
+                        <td className="px-4 py-3">
+                          <code className="text-ink-900 font-medium">{m.csvFile}</code>
+                          {m.methodologyNote && (
+                            <p className="text-xs text-ink-500 mt-1 leading-snug font-normal hidden lg:block">{m.methodologyNote}</p>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 hidden md:table-cell text-ink-600">
+                          {src ? (
+                            src.url !== '#' ? (
+                              <a href={src.url} target="_blank" rel="noopener noreferrer" className="hover:text-teal-700 hover:underline">{src.org}</a>
+                            ) : src.org
+                          ) : '—'}
+                        </td>
+                        <td className="px-4 py-3 hidden sm:table-cell text-ink-600 tabular-nums">
+                          {m.lastReviewed}
+                          <span className="text-ink-400"> · {m.reviewFrequency}</span>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <a
+                            href={`/data/${m.csvFile}`}
+                            download
+                            className="inline-flex items-center gap-1 font-semibold text-teal-700 hover:text-teal-800 underline underline-offset-2"
+                          >
+                            CSV
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-ink-500">
+          Free to use and cite with attribution to FirstYearCost.com. The full source catalog is in{' '}
+          <a href="/data/source_registry.csv" download className="underline">source_registry.csv</a>.
+        </p>
       </section>
 
       <section className="container-pg pb-16 max-w-3xl">

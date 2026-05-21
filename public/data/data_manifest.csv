@@ -17,6 +17,6 @@ misc_monthly.csv,retail-q1-2026,2026-04-30,annual,2026,"Toiletries, medicine, ph
 state_childcare.csv,ccaoa-price-landscape,2026-04-30,annual,2026,"All 50 states + DC. 2023 CCAOA market rate surveys, directional 2026-dollar adjustment."
 childcare_care_type_factors.csv,ccaoa-price-landscape,2026-04-30,annual,2026,"Multipliers applied to state baselines for nanny / nanny-share / part-time / unsure."
 presets.csv,retail-q1-2026,2026-04-30,annual,2026,"Hand-curated scenario presets for the main calculator UI."
-state_leave.csv,state-pfml-portals,2026-05-01,annual,2026,"Per-row source_url to the official state program portal. Programs change annually."
+state_leave.csv,state-pfml-portals,2026-05-19,annual,2026,"Per-row source_url + source_id to the official state program portal. 2026 max-benefit caps, tier columns, and Maryland delay applied. Programs change annually."
 source_registry.csv,,2026-05-18,quarterly,,"Self — this is the registry that other CSVs reference."
 data_manifest.csv,,2026-05-18,quarterly,,"Self — this manifest catalogs every data CSV."
