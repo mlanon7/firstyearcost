@@ -25,6 +25,11 @@ export function CookieBanner() {
     try {
       window.localStorage.setItem(STORAGE_KEY, value);
     } catch {}
+    // Broadcast the choice so analytics (components/Analytics.tsx) can grant
+    // or keep-denied consent immediately, without a page reload.
+    try {
+      window.dispatchEvent(new CustomEvent('fyc-consent-change', { detail: value }));
+    } catch {}
     setShow(false);
   }
 
