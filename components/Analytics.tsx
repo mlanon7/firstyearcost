@@ -1,53 +1,48 @@
 'use client';
 
-import Script from 'next/script';
 import { useEffect } from 'react';
 
 // Google Analytics 4 loader — consent-aware via Google Consent Mode v2.
 //
-// Behavior:
-//   - Renders nothing if NEXT_PUBLIC_GA_ID is unset (local dev, or before
-//     you've created a GA4 property). Safe to ship unconfigured.
-//   - Loads gtag.js, then sets Consent Mode defaults to DENIED for all
-//     storage. GA still sends cookieless "consent mode" pings (privacy-safe,
-//     no identifiers) so you get aggregate traffic counts even before consent.
-//   - When the visitor clicks "Accept all" in the cookie banner, consent is
-//     upgraded to GRANTED and full analytics (with the _ga cookie) begins —
-//     no page reload required.
-//   - "Decline" leaves consent denied; GA stays in cookieless mode.
+// IMPORTANT: we render plain <script> tags (not next/script). In the App
+// Router, next/script with an *inline* afterInteractive script does not
+// reliably render its content into the HTML, so gtag.js would load but never
+// get gtag('config') — GA stays silent. Plain SSR'd <script> tags are part of
+// the initial HTML and execute on parse, which is what GA needs.
 //
-// The cookie banner (components/CookieBanner.tsx) stores the choice in
-// localStorage under `fyc-cookie-consent-v1` and dispatches a
-// `fyc-consent-change` event that this component listens for.
+// Consent posture (US-only site):
+//   - This site targets U.S. users. The U.S. has no GDPR-style opt-IN
+//     requirement; CCPA/CPRA is opt-OUT and we run no ad personalization and
+//     don't sell data. So analytics_storage defaults to GRANTED with an
+//     informational cookie banner + a working opt-out, which is the standard
+//     U.S. posture and lets Realtime populate immediately.
+//   - ad_storage / ad_user_data / ad_personalization stay DENIED always.
+//   - If the visitor clicks "Decline" in the cookie banner, analytics_storage
+//     is downgraded to denied for the rest of the session (and on return
+//     visits, read from localStorage).
+//
+// The cookie banner dispatches `fyc-consent-change`; this component reacts live.
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const CONSENT_KEY = 'fyc-cookie-consent-v1';
 
-function grantConsent() {
+function setAnalyticsConsent(state: 'granted' | 'denied') {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
-  window.gtag('consent', 'update', {
-    analytics_storage: 'granted',
-    ad_storage: 'denied',          // we don't run Google ads personalization
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-  });
+  window.gtag('consent', 'update', { analytics_storage: state });
 }
 
 export function Analytics() {
   useEffect(() => {
     if (!GA_ID) return;
-
-    // If the visitor already accepted on a previous visit, grant immediately.
+    // Honor a previously stored decline on return visits.
     try {
-      if (window.localStorage.getItem(CONSENT_KEY) === 'accept') grantConsent();
+      if (window.localStorage.getItem(CONSENT_KEY) === 'decline') setAnalyticsConsent('denied');
     } catch {
-      /* localStorage blocked — stay in cookieless mode */
+      /* localStorage blocked — leave default */
     }
-
-    // React to live accept/decline from the cookie banner.
     function onConsentChange(e: Event) {
       const choice = (e as CustomEvent<'accept' | 'decline'>).detail;
-      if (choice === 'accept') grantConsent();
+      setAnalyticsConsent(choice === 'decline' ? 'denied' : 'granted');
     }
     window.addEventListener('fyc-consent-change', onConsentChange);
     return () => window.removeEventListener('fyc-consent-change', onConsentChange);
@@ -55,29 +50,24 @@ export function Analytics() {
 
   if (!GA_ID) return null;
 
+  const init = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+gtag('js', new Date());
+gtag('consent', 'default', {
+  analytics_storage: 'granted',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+});
+gtag('config', '${GA_ID}', { anonymize_ip: true });
+`.trim();
+
   return (
     <>
-      {/* gtag.js loader */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="afterInteractive"
-      />
-      {/* Init + Consent Mode v2 defaults (denied until the banner grants) */}
-      <Script id="ga-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('consent', 'default', {
-            analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
-          });
-          gtag('config', '${GA_ID}', { anonymize_ip: true });
-        `}
-      </Script>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+      <script id="ga-init" dangerouslySetInnerHTML={{ __html: init }} />
     </>
   );
 }
