@@ -5,6 +5,7 @@ import { formatUSD } from '@/lib/format';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { BreadcrumbsJsonLd, DatasetJsonLd } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 export const metadata: Metadata = {
   title: 'Infant Childcare Costs by State — All 50 States + DC',
@@ -47,6 +48,7 @@ export default function Page() {
         distributions={[
           { name: 'State childcare costs (CSV)', contentUrl: 'https://firstyearcost.com/data/state_childcare.csv' },
         ]}
+        dateModified={reviewDateFor('/state-childcare-costs')}
       />
       <section className="hero-bg">
         <div className="container-pg pt-12 pb-8 md:pt-16 md:pb-10">

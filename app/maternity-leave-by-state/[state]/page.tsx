@@ -9,6 +9,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 type Params = { state: string };
 
@@ -43,6 +44,7 @@ export default function Page({ params }: { params: Params }) {
         title={`${s.name} Paid Maternity & Paternity Leave (2026)`}
         description={`Paid family leave benefits available to ${s.name} workers in 2026.`}
         url={URL}
+        dateModified={reviewDateFor('/maternity-leave-by-state')}
       />
       <BreadcrumbsJsonLd
         items={[

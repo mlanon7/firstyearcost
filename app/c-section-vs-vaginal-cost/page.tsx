@@ -8,6 +8,7 @@ import { Disclaimer } from '@/components/Disclaimer';
 import { birthOOPRanges, birthBilledAnchors } from '@/data/assumptions';
 import { formatUSD } from '@/lib/format';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 const URL = 'https://firstyearcost.com/c-section-vs-vaginal-cost';
 
@@ -71,6 +72,7 @@ export default function Page() {
         title="C-Section vs. Vaginal Birth Cost (2026)"
         description="Billed totals and out-of-pocket ranges by delivery type and insurance coverage."
         url={URL}
+        dateModified={reviewDateFor('/c-section-vs-vaginal-cost')}
       />
       <BreadcrumbsJsonLd
         items={[

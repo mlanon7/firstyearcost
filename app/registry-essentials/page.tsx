@@ -9,6 +9,7 @@ import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { AffiliateLink, AffiliateDisclosure } from '@/components/AffiliateLink';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 const URL = 'https://firstyearcost.com/registry-essentials';
 
@@ -72,6 +73,7 @@ export default function Page() {
         title="Baby Registry Essentials Checklist (2026)"
         description="A registry checklist sorted into must-have-before-birth, buy-new-for-safety, and can-wait."
         url={URL}
+        dateModified={reviewDateFor('/registry-essentials')}
       />
       <BreadcrumbsJsonLd
         items={[

@@ -6,6 +6,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
 import { BreadcrumbsJsonLd, DatasetJsonLd } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 const URL = 'https://firstyearcost.com/maternity-leave-by-state';
 
@@ -50,6 +51,7 @@ export default function Page() {
             contentUrl: 'https://firstyearcost.com/data/state_leave.csv',
           },
         ]}
+        dateModified={reviewDateFor('/maternity-leave-by-state')}
       />
 
       <section className="hero-bg">

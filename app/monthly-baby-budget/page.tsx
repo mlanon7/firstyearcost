@@ -4,6 +4,7 @@ import { ArrowRight, Calendar } from 'lucide-react';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 export const metadata: Metadata = {
   title: 'Month-by-Month Baby Budget — What to Expect Each Month',
@@ -47,6 +48,7 @@ export default function Page() {
         title="Month-by-Month Baby Budget"
         description="A realistic month-by-month baby budget for the first year — birth, gear, daycare ramp-up, feeding, and cumulative cost."
         url="https://firstyearcost.com/monthly-baby-budget"
+        dateModified={reviewDateFor('/monthly-baby-budget')}
       />
       <BreadcrumbsJsonLd
         items={[

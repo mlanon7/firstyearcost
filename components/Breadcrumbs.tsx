@@ -118,6 +118,7 @@ export function DatasetJsonLd({
   keywords,
   distributions,
   datePublished = '2026-01-01',
+  dateModified,
 }: {
   name: string;
   description: string;
@@ -125,6 +126,7 @@ export function DatasetJsonLd({
   keywords: string[];
   distributions: DatasetDistribution[];
   datePublished?: string;
+  dateModified?: string;
 }) {
   const json = {
     '@context': 'https://schema.org',
@@ -136,6 +138,7 @@ export function DatasetJsonLd({
     creator: { '@type': 'Organization', name: 'FirstYearCost' },
     license: 'https://firstyearcost.com/terms',
     datePublished,
+    dateModified: dateModified ?? datePublished,
     distribution: distributions.map((d) => ({
       '@type': 'DataDownload',
       name: d.name,

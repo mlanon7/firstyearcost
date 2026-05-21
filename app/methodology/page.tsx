@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { sourceNotes, getSource } from '@/data/sourceNotes';
 import { dataManifest } from '@/data/manifest';
+import { reviewDateFor } from '@/lib/reviewDates';
 import { SectionHeader } from '@/components/SectionHeader';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd, DatasetJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
@@ -54,6 +55,7 @@ export default function Page() {
           { name: 'Birth OOP ranges (CSV)', contentUrl: 'https://firstyearcost.com/data/birth_oop_ranges.csv' },
           { name: 'Newborn medical OOP (CSV)', contentUrl: 'https://firstyearcost.com/data/newborn_medical_oop.csv' },
         ]}
+        dateModified={reviewDateFor('/methodology')}
       />
       <section className="hero-bg">
         <div className="container-pg pt-12 pb-8 md:pt-16 md:pb-10">

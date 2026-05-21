@@ -7,6 +7,7 @@ import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { SubsidyCalculator } from '@/components/SubsidyCalculator';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 import { EmailCapture } from '@/components/EmailCapture';
 
 const URL = 'https://firstyearcost.com/childcare-subsidy-calculator';
@@ -60,6 +61,7 @@ export default function Page() {
         title="Childcare Subsidy & Tax Credit Calculator"
         description="Estimate the federal CDCTC and dependent-care FSA savings on your annual childcare bill."
         url={URL}
+        dateModified={reviewDateFor('/childcare-subsidy-calculator')}
       />
       <BreadcrumbsJsonLd
         items={[

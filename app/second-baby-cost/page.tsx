@@ -6,6 +6,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 const URL = 'https://firstyearcost.com/second-baby-cost';
 
@@ -58,6 +59,7 @@ export default function Page() {
         title="How Much Does a Second Baby Cost?"
         description="A practical 2026 breakdown of what a second baby adds to your budget in the first year."
         url={URL}
+        dateModified={reviewDateFor('/second-baby-cost')}
       />
       <BreadcrumbsJsonLd
         items={[

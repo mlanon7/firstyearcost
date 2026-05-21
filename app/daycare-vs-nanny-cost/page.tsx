@@ -5,6 +5,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 export const metadata: Metadata = {
   title: 'Daycare vs. Nanny Cost — Which Is Cheaper?',
@@ -53,6 +54,7 @@ export default function Page() {
         title="Daycare vs. Nanny Cost — Which Is Cheaper?"
         description="A practical comparison of infant daycare, nanny share, and nanny costs in the U.S."
         url="https://firstyearcost.com/daycare-vs-nanny-cost"
+        dateModified={reviewDateFor('/daycare-vs-nanny-cost')}
       />
       <BreadcrumbsJsonLd
         items={[
