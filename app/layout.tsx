@@ -60,6 +60,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieBanner />
         <Analytics />
+        {/* Ahrefs Web Analytics: cookieless, no consent gating needed. */}
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="GiS+Vh6WVe3Xln3P9rg11A"
+          async
+        />
       </body>
     </html>
   );
