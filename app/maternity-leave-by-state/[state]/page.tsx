@@ -10,6 +10,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
+import { buildPageMetadata } from '@/lib/seo';
 
 type Params = { state: string };
 
@@ -20,16 +21,22 @@ export function generateStaticParams(): Params[] {
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const s = stateLeaveBySlug[params.state];
   if (!s) return { title: 'Not found' };
-  const title = `${s.name} Paid Maternity & Paternity Leave (2026)`;
+  // Title template intentionally drops "& Paternity" to keep DC's html
+  // <title> under Google's ~60-char SERP cutoff. Body copy and H1 still
+  // say "Maternity & Paternity Leave" — only the <title> tag shortens.
+  const title = `${s.name} Paid Maternity Leave (2026)`;
+  // Appendix lengths tuned so all 51 state descriptions land in 100-160 chars
+  // regardless of state-name length (DC = 20 chars) and program-name length
+  // ("DC Paid Family Leave" = 20 chars). Keep these short.
   const description = s.paidLeaveWeeks > 0
-    ? `${s.name} runs ${s.program} — ${s.paidLeaveWeeks} weeks of paid family leave at ${Math.round(s.wageReplacementPct * 100)}% wage replacement, capped at $${s.maxWeeklyBenefitUsd}/week.`
-    : `${s.name} has no state-mandated paid family leave program. Workers fall back on the federal FMLA (12 unpaid weeks).`;
-  return {
+    ? `${s.name} runs ${s.program} — ${s.paidLeaveWeeks} weeks of paid family leave at ${Math.round(s.wageReplacementPct * 100)}% wage replacement, capped at $${s.maxWeeklyBenefitUsd}/week. 2026 rules + FMLA stacking guide.`
+    : `${s.name} has no state-mandated paid family leave program. Workers fall back on the federal FMLA (12 unpaid weeks). See FMLA + STD + PTO alternatives.`;
+  return buildPageMetadata({
     title,
     description,
-    alternates: { canonical: `/maternity-leave-by-state/${params.state}` },
-    openGraph: { title, description, url: `/maternity-leave-by-state/${params.state}`, type: 'article' },
-  };
+    path: `/maternity-leave-by-state/${params.state}`,
+    type: 'article',
+  });
 }
 
 export default function Page({ params }: { params: Params }) {

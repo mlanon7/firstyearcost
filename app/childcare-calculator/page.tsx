@@ -5,26 +5,14 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Childcare Cost Calculator — Daycare, Nanny & Home Daycare',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Childcare Cost Calculator — Daycare & Nanny',
   description:
-    'Estimate infant childcare costs by state and care type — center daycare, family home daycare, nanny, nanny share, or part-time. Free, source-backed planning tool.',
-  alternates: { canonical: '/childcare-calculator' },
-  openGraph: {
-    title: 'Childcare Cost Calculator — Daycare, Nanny & Home Daycare',
-    description:
-      'Estimate infant childcare costs by state and care type — center daycare, family home daycare, nanny, nanny share, or part-time.',
-    url: '/childcare-calculator',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Childcare Cost Calculator — Daycare, Nanny & Home Daycare',
-    description:
-      'Estimate infant childcare costs by state and care type — daycare, nanny, nanny share, part-time.',
-  },
-};
+    'Estimate infant childcare costs by state and care type — daycare, home daycare, nanny, nanny share, or part-time. Source-backed.',
+  path: '/childcare-calculator',
+});
 
 const faq: FAQItem[] = [
   {

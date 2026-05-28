@@ -7,22 +7,16 @@ import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
 import { BreadcrumbsJsonLd, DatasetJsonLd } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
+import { buildPageMetadata } from '@/lib/seo';
 
 const URL = 'https://firstyearcost.com/maternity-leave-by-state';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Paid Maternity & Paternity Leave by State (2026)',
   description:
-    'Which states pay parental leave benefits in 2026 — weeks, wage replacement, and weekly benefit caps for California PFL, Colorado FAMLI, Washington Paid Leave, Massachusetts PFML, and every other state program.',
-  alternates: { canonical: '/maternity-leave-by-state' },
-  openGraph: {
-    title: 'Paid Maternity & Paternity Leave by State (2026)',
-    description:
-      'State-by-state guide to paid parental leave: weeks, wage replacement, benefit caps, and links to official program pages.',
-    url: '/maternity-leave-by-state',
-    type: 'website',
-  },
-};
+    'Which states pay parental leave in 2026 — paid weeks, wage replacement, and weekly benefit caps for all 50 states + DC, with sources.',
+  path: '/maternity-leave-by-state',
+});
 
 export default function Page() {
   const sorted = [...stateLeave].sort((a, b) => a.name.localeCompare(b.name));

@@ -7,25 +7,15 @@ import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
 
-export const metadata: Metadata = {
+import { buildPageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = buildPageMetadata({
   title: 'Daycare vs. Nanny Cost — Which Is Cheaper?',
   description:
     'A practical comparison of infant daycare vs. nanny vs. nanny share costs in the U.S. — what each typically costs, where each option wins, and how to decide.',
-  alternates: { canonical: '/daycare-vs-nanny-cost' },
-  openGraph: {
-    title: 'Daycare vs. Nanny Cost — Which Is Cheaper?',
-    description:
-      'A practical comparison of infant daycare vs. nanny vs. nanny share costs in the U.S.',
-    url: '/daycare-vs-nanny-cost',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Daycare vs. Nanny Cost',
-    description:
-      'A practical comparison of infant daycare vs. nanny vs. nanny share costs.',
-  },
-};
+  path: '/daycare-vs-nanny-cost',
+  type: 'article',
+});
 
 const faq: FAQItem[] = [
   {

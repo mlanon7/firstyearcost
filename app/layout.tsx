@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: '%s | FirstYearCost',
   },
   description:
-    "Plan your baby's first year with realistic cost ranges by state, childcare plan, feeding choice, and gear tier. Free calculators, source-backed assumptions, no signup.",
+    "Plan your baby's first year with realistic cost ranges by state, childcare, feeding, and gear. Free calculators, source-backed assumptions, no signup.",
   keywords: [
     'baby cost calculator',
     'first year baby cost',

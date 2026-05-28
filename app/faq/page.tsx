@@ -2,26 +2,15 @@ import type { Metadata } from 'next';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { SectionHeader } from '@/components/SectionHeader';
 import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Frequently Asked Questions',
   description:
     "Answers to the most common questions about first-year baby costs, our calculator's methodology, sources, monetization, and what it does and doesn't include.",
-  alternates: { canonical: '/faq' },
-  openGraph: {
-    title: 'Frequently Asked Questions — FirstYearCost',
-    description:
-      "Answers to the most common questions about first-year baby costs, our methodology, and sources.",
-    url: '/faq',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'FirstYearCost — FAQ',
-    description:
-      "Answers to common questions about first-year baby costs and our methodology.",
-  },
-};
+  path: '/faq',
+  type: 'article',
+});
 
 const faq: FAQItem[] = [
   {

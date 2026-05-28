@@ -9,22 +9,16 @@ import { SubsidyCalculator } from '@/components/SubsidyCalculator';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
 import { EmailCapture } from '@/components/EmailCapture';
+import { buildPageMetadata } from '@/lib/seo';
 
 const URL = 'https://firstyearcost.com/childcare-subsidy-calculator';
 
-export const metadata: Metadata = {
-  title: 'Childcare Subsidy & Tax Credit Calculator (CDCTC + Dependent-Care FSA)',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Childcare Tax Credit & FSA Calculator (2026)',
   description:
-    "Estimate your 2026 federal Child & Dependent Care Tax Credit and dependent-care FSA savings. Free calculator that respects the no-double-dip rule between FSA and CDCTC.",
-  alternates: { canonical: '/childcare-subsidy-calculator' },
-  openGraph: {
-    title: 'Childcare Subsidy & Tax Credit Calculator',
-    description:
-      "Estimate the federal CDCTC + dependent-care FSA savings on your childcare bill. 2026 rules, no signup.",
-    url: '/childcare-subsidy-calculator',
-    type: 'website',
-  },
-};
+    'Estimate 2026 federal Child & Dependent Care Tax Credit and dependent-care FSA savings. Free calculator respecting the no-double-dip rule.',
+  path: '/childcare-subsidy-calculator',
+});
 
 const faq: FAQItem[] = [
   {

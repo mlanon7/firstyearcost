@@ -5,26 +5,14 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Formula vs. Breastfeeding Cost Calculator',
   description:
     "Estimate first-year feeding cost — formula, breastfeeding, or combo — including pump, bottles, and lactation support. Free, source-backed, no medical advice.",
-  alternates: { canonical: '/formula-vs-breastfeeding-calculator' },
-  openGraph: {
-    title: 'Formula vs. Breastfeeding Cost Calculator',
-    description:
-      'First-year feeding cost — formula, breastfeeding, or combo — with pump, bottles, and lactation support.',
-    url: '/formula-vs-breastfeeding-calculator',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Formula vs. Breastfeeding Cost Calculator',
-    description:
-      'First-year feeding cost — formula, breastfeeding, or combo. No medical advice.',
-  },
-};
+  path: '/formula-vs-breastfeeding-calculator',
+});
 
 const faq: FAQItem[] = [
   {
