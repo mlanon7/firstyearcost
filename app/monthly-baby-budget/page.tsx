@@ -6,25 +6,15 @@ import { AdSlot } from '@/components/AdSlot';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
 
-export const metadata: Metadata = {
+import { buildPageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = buildPageMetadata({
   title: 'Month-by-Month Baby Budget — What to Expect Each Month',
   description:
     "A realistic month-by-month baby budget for the first year — birth, hospital bill, gear, daycare ramp-up, feeding, and how cumulative cost stacks up.",
-  alternates: { canonical: '/monthly-baby-budget' },
-  openGraph: {
-    title: 'Month-by-Month Baby Budget — What to Expect Each Month',
-    description:
-      'A realistic month-by-month baby budget for the first year — birth, gear, daycare ramp-up, feeding, cumulative cost.',
-    url: '/monthly-baby-budget',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Month-by-Month Baby Budget',
-    description:
-      'A realistic month-by-month baby budget for the first year.',
-  },
-};
+  path: '/monthly-baby-budget',
+  type: 'article',
+});
 
 const months = [
   { m: 'Month 1',  hd: 'Birth, hospital bill, the gear surge', body: "The biggest single month. Most families pay 70%+ of one-time gear, the bulk of the birth bill, plus 11+ diapers/day and any newborn formula. Plan for $3,000–$8,000 if you're on an employer plan — much higher uninsured." },

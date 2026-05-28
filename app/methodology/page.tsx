@@ -5,26 +5,15 @@ import { reviewDateFor } from '@/lib/reviewDates';
 import { SectionHeader } from '@/components/SectionHeader';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd, DatasetJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Methodology & Sources',
   description:
     'How FirstYearCost.com builds its baby cost estimates — sources, methodology, last-reviewed dates, and what the calculator does and does not do.',
-  alternates: { canonical: '/methodology' },
-  openGraph: {
-    title: 'Methodology & Sources — FirstYearCost',
-    description:
-      'How we build our baby cost estimates — sources, methodology, and last-reviewed dates.',
-    url: '/methodology',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Methodology & Sources',
-    description:
-      'How FirstYearCost.com builds its baby cost estimates.',
-  },
-};
+  path: '/methodology',
+  type: 'article',
+});
 
 export default function Page() {
   return (
@@ -124,7 +113,7 @@ export default function Page() {
           {sourceNotes.map((s) => (
             <div key={s.id} className="p-5">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                {s.url !== '#' ? (
+                {s.url && s.url !== '#' && s.url !== 'various' ? (
                   <a href={s.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-ink-900 hover:text-teal-700 underline-offset-2 hover:underline">
                     {s.title}
                   </a>
@@ -173,7 +162,7 @@ export default function Page() {
                         </td>
                         <td className="px-4 py-3 hidden md:table-cell text-ink-600">
                           {src ? (
-                            src.url !== '#' ? (
+                            src.url && src.url !== '#' && src.url !== 'various' ? (
                               <a href={src.url} target="_blank" rel="noopener noreferrer" className="hover:text-teal-700 hover:underline">{src.org}</a>
                             ) : src.org
                           ) : '—'}

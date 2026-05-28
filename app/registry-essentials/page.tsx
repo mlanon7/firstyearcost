@@ -10,22 +10,17 @@ import { Disclaimer } from '@/components/Disclaimer';
 import { AffiliateLink, AffiliateDisclosure } from '@/components/AffiliateLink';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
+import { buildPageMetadata } from '@/lib/seo';
 
 const URL = 'https://firstyearcost.com/registry-essentials';
 
-export const metadata: Metadata = {
-  title: 'Baby Registry Essentials Checklist (2026) — What to Actually Buy',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Baby Registry Essentials Checklist (2026)',
   description:
-    "A practical baby registry checklist sorted into must-have-before-birth, safety-buy-new, and can-wait categories. Built around our gear cost data so the registry total matches reality.",
-  alternates: { canonical: '/registry-essentials' },
-  openGraph: {
-    title: 'Baby Registry Essentials Checklist (2026)',
-    description:
-      "Must-have-before-birth, safety-buy-new, and can-wait — sorted with real cost ranges from our gear database.",
-    url: '/registry-essentials',
-    type: 'article',
-  },
-};
+    'A practical baby registry checklist sorted into must-have-before-birth, safety-buy-new, and can-wait — built around real gear cost data.',
+  path: '/registry-essentials',
+  type: 'article',
+});
 
 const faq: FAQItem[] = [
   {

@@ -7,22 +7,17 @@ import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { Disclaimer } from '@/components/Disclaimer';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
+import { buildPageMetadata } from '@/lib/seo';
 
 const URL = 'https://firstyearcost.com/second-baby-cost';
 
-export const metadata: Metadata = {
-  title: 'How Much Does a Second Baby Cost? (2026 First-Year Breakdown)',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'How Much Does a Second Baby Cost? (2026)',
   description:
-    'A practical breakdown of what a second baby actually adds to your budget. Where the savings come from (gear, clothing), where the costs stay the same (childcare, formula, medical), and how to model it.',
-  alternates: { canonical: '/second-baby-cost' },
-  openGraph: {
-    title: 'How Much Does a Second Baby Cost? (2026 First-Year Breakdown)',
-    description:
-      'What changes — and what doesn\'t — when you add a second baby. Gear, childcare, feeding, medical, and tax-credit effects.',
-    url: '/second-baby-cost',
-    type: 'article',
-  },
-};
+    "What a second baby actually adds to your budget — where the savings come from (gear, clothing), where the costs don't (childcare, formula, medical).",
+  path: '/second-baby-cost',
+  type: 'article',
+});
 
 const faq: FAQItem[] = [
   {

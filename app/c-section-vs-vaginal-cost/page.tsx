@@ -9,22 +9,17 @@ import { birthOOPRanges, birthBilledAnchors } from '@/data/assumptions';
 import { formatUSD } from '@/lib/format';
 import { BreadcrumbsJsonLd, ArticleJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
+import { buildPageMetadata } from '@/lib/seo';
 
 const URL = 'https://firstyearcost.com/c-section-vs-vaginal-cost';
 
-export const metadata: Metadata = {
-  title: 'C-Section vs. Vaginal Birth Cost (2026) — With and Without Insurance',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'C-Section vs. Vaginal Birth Cost (2026)',
   description:
-    'How much does each type of delivery actually cost in 2026 — billed totals, employer-plan out-of-pocket, marketplace, Medicaid, and uninsured. Sourced from KFF/Peterson-KFF benchmarks.',
-  alternates: { canonical: '/c-section-vs-vaginal-cost' },
-  openGraph: {
-    title: 'C-Section vs. Vaginal Birth Cost (2026)',
-    description:
-      "Billed totals, employer-plan OOP, marketplace, Medicaid, and uninsured ranges — by delivery type. Plus the questions to ask your insurer.",
-    url: '/c-section-vs-vaginal-cost',
-    type: 'article',
-  },
-};
+    'C-section vs. vaginal birth cost in 2026 — billed totals, employer-plan OOP, marketplace, Medicaid, and uninsured ranges from KFF benchmarks.',
+  path: '/c-section-vs-vaginal-cost',
+  type: 'article',
+});
 
 const faq: FAQItem[] = [
   {
