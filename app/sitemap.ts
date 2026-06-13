@@ -26,8 +26,13 @@ const STATIC_META: { path: ReviewedRoute; changeFrequency: MetadataRoute.Sitemap
   { path: '/daycare-vs-nanny-cost',              changeFrequency: 'monthly', priority: 0.7 },
   { path: '/methodology',                        changeFrequency: 'monthly', priority: 0.5 },
   { path: '/faq',                                changeFrequency: 'monthly', priority: 0.5 },
-  { path: '/privacy',                            changeFrequency: 'yearly',  priority: 0.3 },
-  { path: '/terms',                              changeFrequency: 'yearly',  priority: 0.3 },
+  // /privacy and /terms are intentionally excluded from the sitemap.
+  // Both set `robots: { index: false, follow: true }` at the page level
+  // (legal pages eat crawl budget — see docs/AUDIT.md #35). Listing
+  // non-indexable URLs here triggers Ahrefs/GSC "noindex page in sitemap"
+  // warnings without SEO upside; crawlers still discover them via the
+  // footer. REVIEW_DATES still tracks them for the on-page "Last reviewed"
+  // badge — only the sitemap entry is removed.
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

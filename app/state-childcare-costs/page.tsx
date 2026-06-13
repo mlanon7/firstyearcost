@@ -6,26 +6,14 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { AdSlot } from '@/components/AdSlot';
 import { BreadcrumbsJsonLd, DatasetJsonLd } from '@/components/Breadcrumbs';
 import { reviewDateFor } from '@/lib/reviewDates';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Infant Childcare Costs by State — All 50 States + DC',
   description:
     'Browse infant childcare cost ranges in all 50 states plus the District of Columbia: center daycare, family home daycare, and nanny rates. Updated for 2026.',
-  alternates: { canonical: '/state-childcare-costs' },
-  openGraph: {
-    title: 'Infant Childcare Costs by State — All 50 States + DC',
-    description:
-      'Browse infant center, home daycare, and nanny ranges in all 50 states + DC. Updated for 2026.',
-    url: '/state-childcare-costs',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Infant Childcare Costs by State',
-    description:
-      'Browse infant center, home daycare, and nanny ranges in all 50 states + DC.',
-  },
-};
+  path: '/state-childcare-costs',
+});
 
 export default function Page() {
   const sorted = [...stateChildcare].sort((a, b) => a.name.localeCompare(b.name));

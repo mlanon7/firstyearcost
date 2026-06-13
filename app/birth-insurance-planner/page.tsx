@@ -5,26 +5,14 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Birth & Insurance Out-of-Pocket Planner',
   description:
     'Plan birth and newborn out-of-pocket costs by insurance type and delivery type. Includes question lists for your insurer and hospital billing.',
-  alternates: { canonical: '/birth-insurance-planner' },
-  openGraph: {
-    title: 'Birth & Insurance Out-of-Pocket Planner',
-    description:
-      'Plan birth and newborn OOP by insurance type and delivery type. Question lists for your insurer and hospital.',
-    url: '/birth-insurance-planner',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Birth & Insurance Out-of-Pocket Planner',
-    description:
-      'Plan birth and newborn out-of-pocket costs by insurance type and delivery type.',
-  },
-};
+  path: '/birth-insurance-planner',
+});
 
 const faq: FAQItem[] = [
   {

@@ -5,26 +5,14 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Diaper Cost Calculator — Disposable vs. Cloth First-Year Cost',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Diaper Cost Calculator — Disposable vs. Cloth',
   description:
     'Estimate first-year diaper and wipes cost by brand tier and disposable vs. cloth. Includes month-by-month usage and bulk-buy effect.',
-  alternates: { canonical: '/diaper-calculator' },
-  openGraph: {
-    title: 'Diaper Cost Calculator — Disposable vs. Cloth First-Year Cost',
-    description:
-      'Estimate first-year diaper and wipes cost by brand tier and disposable vs. cloth — month-by-month.',
-    url: '/diaper-calculator',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Diaper Cost Calculator — Disposable vs. Cloth',
-    description:
-      'First-year diaper and wipes cost by brand tier — disposable vs. cloth, month-by-month.',
-  },
-};
+  path: '/diaper-calculator',
+});
 
 const faq: FAQItem[] = [
   {

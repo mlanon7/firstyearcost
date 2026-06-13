@@ -5,26 +5,14 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { FAQ, FAQSchema, type FAQItem } from '@/components/FAQ';
 import { NextStepCTA } from '@/components/NextStepCTA';
 import { BreadcrumbsJsonLd } from '@/components/Breadcrumbs';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Baby Gear Budget Planner — What to Buy Before Birth',
   description:
     'Plan your baby gear budget by tier and registry coverage. Includes must-have-before-birth checklist and what to buy new for safety vs. take secondhand.',
-  alternates: { canonical: '/baby-gear-budget' },
-  openGraph: {
-    title: 'Baby Gear Budget Planner — What to Buy Before Birth',
-    description:
-      'Plan your baby gear budget by tier and registry coverage. Must-have checklist + what to buy new for safety.',
-    url: '/baby-gear-budget',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Baby Gear Budget Planner',
-    description:
-      'Plan your baby gear budget by tier and registry coverage. Must-have-before-birth checklist included.',
-  },
-};
+  path: '/baby-gear-budget',
+});
 
 const faq: FAQItem[] = [
   {
