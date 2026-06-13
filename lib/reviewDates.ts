@@ -18,6 +18,7 @@ export const REVIEW_DATES = {
   '/baby-gear-budget':                   '2026-05-08',
   '/birth-insurance-planner':            '2026-05-08',
   '/childcare-subsidy-calculator':       '2026-05-19', // 2026 OBBBA values + step copy
+  '/dependent-care-fsa-vs-tax-credit':   '2026-06-13', // new FSA-vs-CDCTC comparison page
   '/c-section-vs-vaginal-cost':          '2026-05-19',
   '/second-baby-cost':                   '2026-05-18',
   '/registry-essentials':                '2026-05-17',

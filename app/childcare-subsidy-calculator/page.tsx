@@ -164,8 +164,11 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/childcare-calculator" className="btn btn-accent inline-flex">
-            Estimate your childcare bill <ArrowRight className="w-4 h-4" />
+          <Link href="/dependent-care-fsa-vs-tax-credit" className="btn btn-accent inline-flex">
+            FSA vs. tax credit: which to use <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link href="/childcare-calculator" className="btn btn-ghost inline-flex">
+            Estimate your childcare bill
           </Link>
           <Link href="/state-childcare-costs" className="btn btn-ghost inline-flex">
             Compare costs by state

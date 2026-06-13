@@ -180,6 +180,13 @@ export default function HomePage() {
               cta="Estimate tax savings"
             />
             <CalcLink
+              href="/dependent-care-fsa-vs-tax-credit"
+              icon={<Calculator className="w-5 h-5" />}
+              title="Dependent care FSA vs. tax credit"
+              body="Which 2026 lever saves more — the pre-tax FSA or the Child & Dependent Care Tax Credit? When to use both."
+              cta="Compare the two"
+            />
+            <CalcLink
               href="/c-section-vs-vaginal-cost"
               icon={<Calculator className="w-5 h-5" />}
               title="C-section vs. vaginal birth cost"

@@ -32,6 +32,7 @@ export function Footer() {
             <li><Link href="/baby-gear-budget" className="hover:text-ink-900">Gear budget</Link></li>
             <li><Link href="/birth-insurance-planner" className="hover:text-ink-900">Birth & insurance</Link></li>
             <li><Link href="/childcare-subsidy-calculator" className="hover:text-ink-900">Tax credit & FSA</Link></li>
+            <li><Link href="/dependent-care-fsa-vs-tax-credit" className="hover:text-ink-900">FSA vs. tax credit</Link></li>
           </ul>
         </div>
 

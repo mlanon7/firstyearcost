@@ -17,6 +17,7 @@ const STATIC_META: { path: ReviewedRoute; changeFrequency: MetadataRoute.Sitemap
   { path: '/baby-gear-budget',                   changeFrequency: 'monthly', priority: 0.8 },
   { path: '/birth-insurance-planner',            changeFrequency: 'monthly', priority: 0.8 },
   { path: '/childcare-subsidy-calculator',       changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/dependent-care-fsa-vs-tax-credit',   changeFrequency: 'monthly', priority: 0.8 },
   { path: '/c-section-vs-vaginal-cost',          changeFrequency: 'monthly', priority: 0.8 },
   { path: '/second-baby-cost',                   changeFrequency: 'monthly', priority: 0.7 },
   { path: '/registry-essentials',                changeFrequency: 'monthly', priority: 0.8 },
