@@ -8,6 +8,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { Disclaimer } from '@/components/Disclaimer';
 import { ChildcareCalculator } from '@/components/ChildcareCalculator';
 import { BreadcrumbsJsonLd, VisibleBreadcrumbs } from '@/components/Breadcrumbs';
+import { reviewDateFor } from '@/lib/reviewDates';
 
 export async function generateStaticParams() {
   return stateChildcare.map((s) => ({ state: slugifyState(s.name) }));
@@ -56,6 +57,17 @@ export default function Page({ params }: { params: { state: string } }) {
     .slice(0, 8)
     .map((x) => x.state);
 
+  // Alphabetical prev/next forms a complete cycle through all 51 states
+  // (Wyoming wraps to Alabama). Every state page therefore has two guaranteed
+  // neighbor inlinks, which — together with the leave cross-link below — fixes
+  // the "only one internal link" discovery problem that keeps deep
+  // programmatic pages out of Google's crawl queue.
+  const alpha = [...stateChildcare].sort((a, b) => a.name.localeCompare(b.name));
+  const ai = alpha.findIndex((x) => x.code === s.code);
+  const prevState = alpha[(ai - 1 + alpha.length) % alpha.length];
+  const nextState = alpha[(ai + 1) % alpha.length];
+  const leaveSlug = slugifyState(s.name);
+
   return (
     <>
       <BreadcrumbsJsonLd
@@ -82,6 +94,7 @@ export default function Page({ params }: { params: { state: string } }) {
               or about <strong>{formatUSD(s.centerLow / 12)}–{formatUSD(s.centerHigh / 12)}</strong> per month.
               That's about {s.pctMedianIncome}% of the state's median household income.
             </p>
+            <p className="mt-3 text-xs text-ink-500">Last reviewed {reviewDateFor('/state-childcare-costs')}</p>
           </div>
         </div>
       </section>
@@ -160,6 +173,32 @@ export default function Page({ params }: { params: { state: string } }) {
             See all 50 states →
           </Link>
         </p>
+      </section>
+
+      {/* Cross-link to the matching parental-leave page + alphabetical
+          prev/next. These guarantee multiple inlinks per state page so the
+          deep programmatic pages get discovered and crawled. */}
+      <section className="container-pg pb-16">
+        <div className="card p-6 bg-ink-900 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-wider text-ink-300">Planning your leave?</p>
+            <h2 className="h4 mt-1">Paid parental leave in {s.name}</h2>
+            <p className="text-sm text-ink-300 mt-1">Weeks, wage replacement, and 2026 benefit caps for {s.name}.</p>
+          </div>
+          <Link href={`/maternity-leave-by-state/${leaveSlug}`} className="btn btn-accent shrink-0 inline-flex">
+            See {s.name} leave →
+          </Link>
+        </div>
+
+        <nav aria-label="Browse states alphabetically" className="mt-6 flex items-center justify-between gap-3 text-sm">
+          <Link href={`/state-childcare-costs/${slugifyState(prevState.name)}`} className="inline-flex items-center gap-1 text-teal-700 hover:underline">
+            ← {prevState.name}
+          </Link>
+          <Link href="/state-childcare-costs" className="text-ink-500 hover:text-ink-900">All states</Link>
+          <Link href={`/state-childcare-costs/${slugifyState(nextState.name)}`} className="inline-flex items-center gap-1 text-teal-700 hover:underline">
+            {nextState.name} →
+          </Link>
+        </nav>
       </section>
     </>
   );
