@@ -45,6 +45,14 @@ export default function Page({ params }: { params: Params }) {
   const cc = stateBySlug[params.state];
   const URL = `https://firstyearcost.com/maternity-leave-by-state/${params.state}`;
 
+  // Alphabetical prev/next — a complete cycle through all 51 states so every
+  // leave page has two guaranteed neighbor inlinks (plus the childcare
+  // cross-link below). Improves crawl discovery of the deep programmatic pages.
+  const alphaLeave = [...stateLeave].sort((a, b) => a.name.localeCompare(b.name));
+  const li = alphaLeave.findIndex((x) => x.code === s.code);
+  const prevLeave = alphaLeave[(li - 1 + alphaLeave.length) % alphaLeave.length];
+  const nextLeave = alphaLeave[(li + 1) % alphaLeave.length];
+
   return (
     <>
       <ArticleJsonLd
@@ -213,6 +221,16 @@ export default function Page({ params }: { params: Params }) {
             </Link>
           ))}
         </div>
+
+        <nav aria-label="Browse states alphabetically" className="mt-8 flex items-center justify-between gap-3 text-sm">
+          <Link href={`/maternity-leave-by-state/${slugifyState(prevLeave.name)}`} className="inline-flex items-center gap-1 text-teal-700 hover:underline">
+            ← {prevLeave.name}
+          </Link>
+          <Link href="/maternity-leave-by-state" className="text-ink-500 hover:text-ink-900">All states</Link>
+          <Link href={`/maternity-leave-by-state/${slugifyState(nextLeave.name)}`} className="inline-flex items-center gap-1 text-teal-700 hover:underline">
+            {nextLeave.name} →
+          </Link>
+        </nav>
       </section>
     </>
   );
